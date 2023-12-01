@@ -1,2 +1,4 @@
-package providers;public class UserFactory {
+package providers;
+
+public class UserFactory {
 }

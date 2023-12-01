@@ -1,2 +1,4 @@
-package providers;public class UserBuilder {
+package providers;
+
+public class UserBuilder {
 }
