@@ -12,6 +12,7 @@ import pages.home.SearchResultsPage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -22,6 +23,7 @@ public class TopMenuPage extends BasePage {
 
     @FindBy(css = "#_desktop_logo")
     private WebElement myStoreBtn;
+
     @FindBy(css = "#top-menu>.category")
     private List<WebElement> categories;
 
@@ -47,26 +49,55 @@ public class TopMenuPage extends BasePage {
         return new SearchResultsPage(driver);
     }
 
-
-    private void hoverOverCategory(int index) {
-        actions.moveToElement(categories.get(index)).perform();
-    }
-
-    private List<WebElement> getSubCategories(int index) {
-        hoverOverCategory(index);
-        return categories.get(index).findElements(By.cssSelector(".dropdown-submenu"));
-    }
-
-    public void goToCategoryPage(int index) {
-        click(categories.get(index));
+    public List<String> getCategoryNames() {
+        return categories.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
 
     }
 
-    public void goToSubCategoryPage(int categoryIndex, int subCategoryIndex) {
-        List<WebElement> subCategories = getSubCategories(categoryIndex);
-        click(subCategories.get(subCategoryIndex));
+    private WebElement chooseCategory(String categoryName) {
+        WebElement chosenCategory = null;
+        for (WebElement category : categories) {
+            if (getText(category).equals(categoryName)) {
+                chosenCategory = category;
+            }
+        }
+        return chosenCategory;
+    }
+
+
+    private List<WebElement> getSubCategories(String categoryName) {
+        WebElement chosenCategory = chooseCategory(categoryName);
+        hoverOverElement(chosenCategory);
+        return chosenCategory.findElements(By.cssSelector(".dropdown-submenu"));
+    }
+
+
+    public WebElement chooseSubCategory(String categoryName, String subCategoryName) {
+        List<WebElement> subCategories = getSubCategories(categoryName);
+        WebElement chosenSubcategory = null;
+
+        for (WebElement subCategory : subCategories) {
+            if (getText(subCategory).equals(subCategoryName)) {
+                chosenSubcategory = subCategory;
+            }
+
+        }
+        return chosenSubcategory;
+    }
+
+    public void goToCategoryPage(String categoryName) {
+        click(chooseCategory(categoryName));
 
     }
+
+
+    public void goToSubCategoryPage(String categoryName, String subCategoryName) {
+        click(chooseSubCategory(categoryName, subCategoryName));
+
+    }
+
 
     public List<String> getSuggestedProductNames() {
         List<String> suggestedProductNames = new ArrayList<>();
@@ -80,4 +111,6 @@ public class TopMenuPage extends BasePage {
         return suggestedProductNames;
 
     }
+
+
 }

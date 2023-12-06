@@ -64,6 +64,10 @@ public class BasePage {
         return element.getText();
     }
 
+    protected void hoverOverElement(WebElement element) {
+        actions.moveToElement(element).perform();
+    }
+
     public void waitToBeClickable(WebElement element) {
         defaultWait.until(ExpectedConditions.elementToBeClickable(element));
     }

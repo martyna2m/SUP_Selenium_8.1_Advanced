@@ -12,10 +12,12 @@ import java.util.Random;
 public class SearchInputTest extends TestBase {
 
     @Test
-    public void searchItem() {
+    public void searchRandomProduct() {
+
         openPage("homePage");
 
-        String productName = at(HomePage.class).getProductMiniatureContainerPage().getProductName(new Random().nextInt(8));
+        int index = new Random().nextInt(8);
+        String productName = at(HomePage.class).getProductMiniatureContainerPage().getProductName(index);
 
         at(HomePage.class)
                 .getTopMenuPage()

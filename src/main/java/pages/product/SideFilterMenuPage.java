@@ -8,6 +8,8 @@ import pages.base.BasePage;
 @Setter
 public class SideFilterMenuPage extends BasePage {
 
+
+
     public SideFilterMenuPage(WebDriver driver) {
         super(driver);
     }
