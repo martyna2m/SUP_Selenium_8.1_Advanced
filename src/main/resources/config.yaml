@@ -4,7 +4,7 @@ url:
   homePage: http://146.59.32.4/index.php
   contactUsPage: ?controller=contact
   signInPage: ?controller=authentication&back=my-account
-  cartPage: ?controller=cart&action=show
+  basketPage: ?controller=cart&action=show
 
 credentials:
   login: xxx

@@ -7,20 +7,17 @@ import pages.base.BasePage;
 import pages.commons.TopGridPage;
 import pages.commons.TopMenuPage;
 import pages.product.ProductMiniatureContainerPage;
-
 @Getter
 @Setter
-public class HomePage extends BasePage {
+public class SearchResultsPage extends BasePage {
 
-    public HomePage(WebDriver driver) {
-        super(driver);
-    }
-
-    TopGridPage topGridPage = new TopGridPage(driver);
-    TopMenuPage topMenuPage = new TopMenuPage(driver);
+    TopGridPage topGridPage;
+    TopMenuPage topMenuPage;
     ProductMiniatureContainerPage productMiniatureContainerPage = new ProductMiniatureContainerPage(driver);
 
-
+    public SearchResultsPage(WebDriver driver) {
+        super(driver);
+    }
 
 
 }

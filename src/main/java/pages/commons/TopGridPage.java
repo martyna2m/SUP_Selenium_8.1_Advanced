@@ -1,5 +1,7 @@
 package pages.commons;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,7 +9,8 @@ import pages.account.SignInPage;
 import pages.base.BasePage;
 import pages.contact.ContactUsPage;
 import pages.basket.BasketPage;
-
+@Getter
+@Setter
 public class TopGridPage extends BasePage {
     public TopGridPage(WebDriver driver) {
         super(driver);

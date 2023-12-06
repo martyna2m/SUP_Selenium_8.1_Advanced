@@ -17,7 +17,7 @@ public class TestBase {
     protected static WebDriver driver;
     protected static Browser activeBrowser;
     protected static DriverFactory driverFactory = new DriverFactory();
-    protected static UrlProvider urlProvider = new UrlProvider();
+
 
     @BeforeAll
     static void setUpDriver() {
@@ -39,13 +39,9 @@ public class TestBase {
 
 
     public void openPage(String urlKey) {
-        String homePageUrl = urlProvider.getUrls().get("homePage").toString();
-        if (!Objects.equals(urlKey, "homePage")) {
-            String urlSuffix = urlProvider.getUrls().get(urlKey).toString();
-            String urlToGet = homePageUrl + urlSuffix;
-            driver.get(urlToGet);
-        } else driver.get(homePageUrl);
-
+      UrlProvider urlProvider = new UrlProvider();
+       String selectedUrl = urlProvider.getUrl(urlKey);
+        driver.get(selectedUrl);
     }
 
 
