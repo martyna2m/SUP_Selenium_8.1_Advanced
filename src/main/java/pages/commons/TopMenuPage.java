@@ -57,17 +57,16 @@ public class TopMenuPage extends BasePage {
     }
 
     private WebElement chooseCategory(String categoryName) {
-        WebElement chosenCategory = null;
         for (WebElement category : categories) {
-            if (getText(category).equals(categoryName)) {
-                chosenCategory = category;
+            if (getText(category).equals(categoryName.toUpperCase())) {
+               return category;
             }
         }
-        return chosenCategory;
+        return null;
     }
 
 
-    private List<WebElement> getSubCategories(String categoryName) {
+    public List<WebElement> getSubCategories(String categoryName) {
         WebElement chosenCategory = chooseCategory(categoryName);
         hoverOverElement(chosenCategory);
         return chosenCategory.findElements(By.cssSelector(".dropdown-submenu"));
@@ -76,15 +75,14 @@ public class TopMenuPage extends BasePage {
 
     public WebElement chooseSubCategory(String categoryName, String subCategoryName) {
         List<WebElement> subCategories = getSubCategories(categoryName);
-        WebElement chosenSubcategory = null;
 
         for (WebElement subCategory : subCategories) {
             if (getText(subCategory).equals(subCategoryName)) {
-                chosenSubcategory = subCategory;
+                return subCategory;
             }
 
         }
-        return chosenSubcategory;
+        return null;
     }
 
     public void goToCategoryPage(String categoryName) {

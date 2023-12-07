@@ -2,6 +2,7 @@ package pages.basket;
 
 import lombok.Getter;
 import lombok.Setter;
+import models.Basket;
 import models.BasketLine;
 import models.Product;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,7 @@ public class BasketLinePage extends BasePage {
     }
 
     @FindBy(css = ".product-line-info>a")
-    private WebElement productName;
+    private WebElement nameLabel;
 
     @FindBy(css = ".current-price>span")
     private WebElement currentPrice;
@@ -40,6 +41,7 @@ public class BasketLinePage extends BasePage {
     private WebElement quantityInput;
 
     public BasketLine toBasketLine() {
-        return new BasketLine(new Product(productName.getText(), getPrice(currentPrice)), getIntNumber(quantityInput), getBigDecNumber(totalPrice));
+        return new BasketLine(new Product(this.nameLabel.getText(), getPrice(this.currentPrice)), getIntNumberFromValue(this.quantityInput), getTotalPrice(getPrice(this.currentPrice), getIntNumberFromValue(this.quantityInput)));
+
     }
 }

@@ -4,12 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base.BasePage;
-import pages.basket.BasketLinePage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 public class ProductMiniatureContainerPage extends BasePage {
 
@@ -22,7 +19,7 @@ public class ProductMiniatureContainerPage extends BasePage {
 
     public List<ProductMiniaturePage> getProductMiniatures() {
         List<ProductMiniaturePage> productMiniaturePages = new ArrayList<>();
-        for (WebElement productMiniaturePage : productMiniatures){
+        for (WebElement productMiniaturePage : productMiniatures) {
             productMiniaturePages.add(new ProductMiniaturePage(driver, productMiniaturePage));
         }
         return productMiniaturePages;
@@ -38,8 +35,19 @@ public class ProductMiniatureContainerPage extends BasePage {
         return productNames;
     }
 
-    public String getProductName(int index) {
-        return getProductNamesList().get(index);
+
+    public void selectProduct(String expectedName) {
+        for (ProductMiniaturePage productMiniature : getProductMiniatures()) {
+            if (productMiniature.getName() != null && expectedName.equalsIgnoreCase(productMiniature.getName())) {
+                click(productMiniature.getIcon());
+                break;
+            }
+        }
     }
 
+    public String getProductName(int index) {
+        return getProductMiniatures().get(index).getName();
+    }
 }
+
+

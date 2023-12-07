@@ -2,7 +2,7 @@ package pages.base;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.openqa.selenium.By;
+import models.Basket;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,7 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
@@ -23,6 +24,7 @@ public class BasePage {
     public WebDriver driver;
     public Actions actions;
     public WebDriverWait defaultWait;
+    public Basket basket;
 
     public BasePage(WebDriver driver) {
         init(driver);
@@ -39,6 +41,7 @@ public class BasePage {
         this.driver = driver;
         this.actions = new Actions(driver);
         this.defaultWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.basket = new Basket();
         // get 10 from yaml
     }
 
@@ -80,21 +83,34 @@ public class BasePage {
         //if not used, delete
     }
 
+    public static BigDecimal deleteCurrency(String priceWithCurrency) {
+        Pattern pattern = Pattern.compile("\\$\\d+\\.\\d{2}");
+        Matcher matcher = pattern.matcher(priceWithCurrency);
 
-    public BigDecimal getPrice(WebElement element) {
-        // delete currency
-        return new BigDecimal(getText(element));
+        if (matcher.find()) {
+            String priceString = matcher.group().substring(1);
+            return new BigDecimal(priceString);
+        } else {
+
+            return BigDecimal.ZERO;
+        }
     }
 
-    public int getIntNumber(WebElement element) {
-        return Integer.parseInt(element.getText());
+    public BigDecimal getPrice(WebElement element) {
+        return deleteCurrency(getText(element));
+    }
+
+    public int getIntNumberFromValue(WebElement element) {
+        return Integer.parseInt(element.getAttribute("value"));
+    }
+
+    public int getIntNumberFromText(WebElement element) {
+        return Integer.parseInt(getText(element));
     }
 
     public BigDecimal getTotalPrice(BigDecimal price, int quantity) {
         return price.multiply(BigDecimal.valueOf(quantity));
     }
 
-    public BigDecimal getBigDecNumber(WebElement element) {
-        return BigDecimal.valueOf(Long.parseLong(element.getText()));
-    }
+
 }

@@ -40,5 +40,9 @@ public class ProductMiniaturePage extends BasePage {
     @FindBy(css = "div>.color")
     List<WebElement> colorOptions;
 
+    public String getName(){
+       return getText(this.nameLabel);
+    }
+
 
 }

@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class BasketLine {
-
     private Product product;
     private int quantity;
     private BigDecimal totalPrice;
@@ -17,5 +16,15 @@ public class BasketLine {
         this.product = product;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
+
+    }
+
+    @Override
+    public String toString() {
+        return "BasketLine{" +
+                "product=" + product +
+                ", quantity=" + quantity +
+                ", totalPrice=" + totalPrice +
+                '}';
     }
 }

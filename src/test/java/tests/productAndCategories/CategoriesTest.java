@@ -2,9 +2,7 @@ package tests.productAndCategories;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebElement;
 import pages.commons.TopMenuPage;
-import pages.home.HomePage;
 import pages.product.CategoryPage;
 import pages.product.SideFilterMenuPage;
 import tests.base.TestBase;
@@ -22,8 +20,22 @@ public class CategoriesTest extends TestBase {
         for (String categoryName : categoryNames) {
             at(TopMenuPage.class).goToCategoryPage(categoryName);
             Assertions.assertThat(at(CategoryPage.class).getCategoryName()).isEqualTo(categoryName);
-            System.out.println(at(CategoryPage.class).getCategoryName());
-            Assertions.assertThat(at(CategoryPage.class).isSideFilterMenuDisplayed()).isTrue();
+            Assertions.assertThat(at(SideFilterMenuPage.class).isSideFilterMenuDisplayed()).isTrue();
+
+            int actualNumberOfProducts = at(CategoryPage.class).getProductMiniatureContainerPage().getProductMiniatures().size();
+
+            String actualNumberOfProductsInfo = at(CategoryPage.class).getTotalNumberOfProductsInfo();
+            String expectedNumberOfProductsInfo = "There are " + actualNumberOfProducts + " products.";
+
+            Assertions.assertThat(expectedNumberOfProductsInfo).isEqualTo(actualNumberOfProductsInfo);
         }
     }
+
+    @Test
+    public void iterateThroughSubCategories() {
+        openPage("homePage");
+
+
+    }
 }
+

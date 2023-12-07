@@ -24,7 +24,7 @@ public class BasketPage extends BasePage {
         super(driver);
     }
 
-    public List<BasketLinePage> getBasketLines() {
+    public List<BasketLinePage> getBasketLinePages() {
         List<BasketLinePage> basketLinePages = new ArrayList<>();
         for (WebElement basketLine : basketLines){
             basketLinePages.add(new BasketLinePage(driver, basketLine));
@@ -32,5 +32,8 @@ public class BasketPage extends BasePage {
         return basketLinePages;
     }
 
+    public List<BasketLine> getBasketLines(){
+        return basket.getBasketLines();
+    }
 
 }

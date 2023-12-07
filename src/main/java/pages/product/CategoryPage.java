@@ -13,29 +13,32 @@ import java.util.List;
 @Setter
 public class CategoryPage extends BasePage {
 
+    ProductMiniatureContainerPage productMiniatureContainerPage = new ProductMiniatureContainerPage(driver);
+
+    private SideFilterMenuPage sideFilterMenuPage = new SideFilterMenuPage(driver);
+
+
     @FindBy(css = ".h1")
     private WebElement header;
 
     @FindBy(css = ".category-sub-menu>li")
     private List<WebElement> subCategoriesOptions;
 
-    @FindBy (css = "#search_filters")
-    WebElement sideFilterMenuPage;
-
-    @FindBy (css = "#products")
-    ProductMiniatureContainerPage productMiniatureContainerPage;
+    @FindBy(css = ".total-products")
+    private WebElement totalNumberOfProductsInfo;
 
 
     public CategoryPage(WebDriver driver) {
         super(driver);
     }
 
-    public String getCategoryName(){
+    public String getCategoryName() {
         return getText(header);
     }
 
-    public Boolean isSideFilterMenuDisplayed(){
-        return sideFilterMenuPage.isDisplayed();
+
+    public String getTotalNumberOfProductsInfo() {
+        return getText(totalNumberOfProductsInfo);
     }
 
 }

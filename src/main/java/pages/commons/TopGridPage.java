@@ -19,11 +19,14 @@ public class TopGridPage extends BasePage {
     @FindBy(css = "#contact-link")
     private WebElement contactUsBtn;
 
-    @FindBy(css = ".user-info")
+    @FindBy(css = ".user-info>a")
     private WebElement signInBtn;
 
-    @FindBy(css = "._desktop_cart")
-    private WebElement cartBtn;
+    @FindBy(css = "#_desktop_cart")
+    private WebElement basketBtn;
+
+  @FindBy(css = ".cart-products-count")
+    private WebElement numberOfProductsInBasketIcon;
 
 
     public ContactUsPage goToContactUsPage(){
@@ -34,9 +37,12 @@ public class TopGridPage extends BasePage {
         click(signInBtn);
         return new SignInPage(driver);
     }
-     public BasketPage goToCartPage(){
-        click(cartBtn);
+     public BasketPage goToBasketPage(){
+        click(basketBtn);
         return new BasketPage(driver);
+    }
+    public int getNumberOfItemsInBasket(){
+       return Integer.parseInt(getText(numberOfProductsInBasketIcon).replaceAll("\\(([^)]*)\\)", "$1"));
     }
 
 }
