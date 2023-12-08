@@ -8,8 +8,6 @@ import models.Product;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import pages.base.BasePage;
 
 @Getter
@@ -40,8 +38,19 @@ public class BasketLinePage extends BasePage {
     @FindBy(css = "[name = 'product-quantity-spin']")
     private WebElement quantityInput;
 
+
+    @FindBy(css = ".remove-from-cart>i")
+    private WebElement deleteBtn;
+
+
     public BasketLine toBasketLine() {
-        return new BasketLine(new Product(this.nameLabel.getText(), getPrice(this.currentPrice)), getIntNumberFromValue(this.quantityInput), getTotalPrice(getPrice(this.currentPrice), getIntNumberFromValue(this.quantityInput)));
+        return new BasketLine(new Product(nameLabel.getText(), getPrice(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPrice(getPrice(currentPrice), getIntNumberFromValue(quantityInput)));
+
+    }
+
+    public void deleteBasketLine() {
+        click(deleteBtn);
+        Basket.getInstance().removeBasketLine(nameLabel.getText());
 
     }
 }

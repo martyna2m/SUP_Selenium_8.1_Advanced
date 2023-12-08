@@ -41,7 +41,7 @@ public class BasePage {
         this.driver = driver;
         this.actions = new Actions(driver);
         this.defaultWait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.basket = new Basket();
+        this.basket = Basket.getInstance();
         // get 10 from yaml
     }
 

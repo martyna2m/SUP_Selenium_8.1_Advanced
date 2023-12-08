@@ -5,7 +5,7 @@ import lombok.Setter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.account.SignInPage;
+import pages.account.LogInPage;
 import pages.base.BasePage;
 import pages.contact.ContactUsPage;
 import pages.basket.BasketPage;
@@ -33,9 +33,9 @@ public class TopGridPage extends BasePage {
         click(contactUsBtn);
         return new ContactUsPage(driver);
     }
-     public SignInPage goToSignInPage(){
+     public LogInPage goToSignInPage(){
         click(signInBtn);
-        return new SignInPage(driver);
+        return new LogInPage(driver);
     }
      public BasketPage goToBasketPage(){
         click(basketBtn);

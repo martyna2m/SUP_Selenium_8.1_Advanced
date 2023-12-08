@@ -27,4 +27,15 @@ public class BasketLine {
                 ", totalPrice=" + totalPrice +
                 '}';
     }
+
+    public void increaseQuantityAndTotalPrice(int newQuantity, BigDecimal newTotalPrice) {
+        this.quantity += newQuantity;
+        this.totalPrice = this.totalPrice.add(newTotalPrice);
+    }
+
+
+
+
+
 }
+

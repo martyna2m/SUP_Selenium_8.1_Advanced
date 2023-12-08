@@ -13,15 +13,14 @@ public class SearchInputTest extends TestBase {
 
     @Test
     public void searchRandomProduct() {
-
         openPage("homePage");
 
-        int index = new Random().nextInt(8);
-        String productName = at(HomePage.class).getProductMiniatureContainerPage().getProductName(index);
+        HomePage homePage = new HomePage(driver);
 
-        at(HomePage.class)
-                .getTopMenuPage()
-                .typeInSearchInputAndSubmit(productName);
+        int index = new Random().nextInt(homePage.getProductMiniatureContainerPage().getProductMiniatures().size());
+        String productName = homePage.getProductMiniatureContainerPage().getProductName(index);
+
+        homePage.getTopMenuPage().typeInSearchInputAndSubmit(productName);
 
         List<String> resultsNames = at(SearchResultsPage.class).getProductMiniatureContainerPage().getProductNamesList();
         for (String name : resultsNames) {

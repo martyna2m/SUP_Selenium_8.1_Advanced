@@ -50,17 +50,18 @@ public class AddedToBasketPopUpPage extends BasePage {
 
     }
 
-    public void waitForPopUp() {
+    public AddedToBasketPopUpPage waitForPopUp() throws InterruptedException {
+        Thread.sleep(1000);
         defaultWait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='blockcart-modal']//*[@class='modal-dialog']//*[@class='modal-content']"))));
-
+        return this;
     }
 
-    public void goToBasket(){
+    public void goToBasket() {
         click(proceedToCheckOutBtn);
     }
 
 
-    public void clickContinueShopping(){
+    public void clickContinueShopping() {
         click(continueShoppingBtn);
     }
 }

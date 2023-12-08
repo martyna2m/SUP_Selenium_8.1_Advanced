@@ -8,9 +8,16 @@ url:
   accessoriesPage: ?id_category=6&controller=category&id_lang=2
   artPage: ?id_category=9&controller=category&id_lang=2
 
-credentials:
-  login: xxx
-  password: yyy
+users:
+  user1:
+    firstName: Alexander
+    lastName: Hamilton
+    gender: male
+    email: alex@hamilton.com
+    password: password
+    birthdate: 05/01/1970
+
+
 
 
 

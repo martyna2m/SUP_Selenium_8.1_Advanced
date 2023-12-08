@@ -1,19 +1,43 @@
 package models;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
-@Getter
-@Setter
+
 public class Basket {
 
-    private List<BasketLine> basketLines = new ArrayList<>();
+    private static Basket instance;
+    private List<BasketLine> basketLines;
 
-    public void addBasketLineToBasket(BasketLine basketLine) {
-       basketLines.add(basketLine);
+    private Basket() {
+        basketLines = new ArrayList<>();
     }
 
+    public static Basket getInstance() {
+        if (instance == null) {
+            instance = new Basket();
+        }
+        return instance;
+    }
+
+    public List<BasketLine> getExpectedBasketLines() {
+        return basketLines;
+    }
+
+    public void addBasketLineToBasket(BasketLine basketLine) {
+        basketLines.add(basketLine);
+    }
+
+    public BasketLine getBasketLineFromExpectedBasket(String name) {
+        for (BasketLine basketLine : getExpectedBasketLines()) {
+            if ((basketLine.getProduct().getName()).equals(name)) {
+                return basketLine;
+            }
+        }
+        return null;
+    }
+
+    public void removeBasketLine(String name) {
+        getExpectedBasketLines().remove(getBasketLineFromExpectedBasket(name));
+    }
 
 }

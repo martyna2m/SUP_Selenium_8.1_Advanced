@@ -10,6 +10,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.base.BasePage;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class ProductDetailsPage extends BasePage {
@@ -42,10 +44,17 @@ public class ProductDetailsPage extends BasePage {
     @FindBy(css = ".add-to-cart")
     private WebElement addToBasketBtn;
 
+    @FindBy(xpath = "(//a[@itemprop ='item'])[1]")
+    private WebElement homeBtn;
+
     public ProductDetailsPage selectSize(String size) {
         Select sizeOptions = new Select(sizeSelectBtn);
         sizeOptions.selectByValue(size.toUpperCase());
         return this;
+    }
+
+    public void returnToHomePage(){
+        click(homeBtn);
     }
 
     public ProductDetailsPage selectQuantity(int expectedQuantity) {
@@ -65,34 +74,32 @@ public class ProductDetailsPage extends BasePage {
 
     public BasketLine addProductToBasket() {
         if (isProductInBasket()) {
-           //
+            for (BasketLine basketLine : basket.getExpectedBasketLines()) {
+                if ((basketLine.getProduct().getName()).equals(getText(nameLabel))) {
+                    basketLine.increaseQuantityAndTotalPrice(getIntNumberFromValue(quantityInput),getTotalPrice(getPrice(currentPrice), getIntNumberFromValue(quantityInput)) );
+                    click(addToBasketBtn);
+                    return basketLine;
+                }
+            }
         } else {
-            click(this.addToBasketBtn);
-            BasketLine expectedBasketLine = new BasketLine(new Product(getText(this.nameLabel), getPrice(this.currentPrice)), getIntNumberFromValue(this.quantityInput), getTotalPrice(getPrice(this.currentPrice), getIntNumberFromValue(this.quantityInput)));
+            BasketLine expectedBasketLine = new BasketLine(new Product(getText(nameLabel), getPrice(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPrice(getPrice(currentPrice), getIntNumberFromValue(quantityInput)));
             basket.addBasketLineToBasket(expectedBasketLine);
+            click(addToBasketBtn);
             return expectedBasketLine;
-        } return null;
+        }
+        return null;
     }
+
 
     public boolean isProductInBasket() {
         boolean isAdded = false;
-
-        for (BasketLine basketLine : basket.getBasketLines()) {
+        for (BasketLine basketLine : basket.getExpectedBasketLines()) {
             if ((basketLine.getProduct().getName()).equals(getText(this.nameLabel))) {
                 isAdded = true;
             }
         }
         return isAdded;
-
     }
 
 
-    private BasketLine searchBasket(String productName) {
-        for (BasketLine basketLine : basket.getBasketLines()) {
-            if ((basketLine.getProduct().getName()).equals(productName)) {
-                return basketLine;
-            }//
-        }
-        return null;
-    }
 }

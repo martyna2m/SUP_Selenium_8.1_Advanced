@@ -1,6 +1,6 @@
 package providers;
 
-import providers.User;
+import models.User;
 
 public class UserBuilder {
 

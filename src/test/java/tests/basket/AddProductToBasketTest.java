@@ -24,7 +24,7 @@ public class AddProductToBasketTest extends TestBase {
 
         at(CategoryPage.class)
                 .getProductMiniatureContainerPage()
-                .selectProduct(expectedProductName);
+                .selectProductByName(expectedProductName);
 
         BasketLine expectedBasketLine =
                 at(ProductDetailsPage.class)

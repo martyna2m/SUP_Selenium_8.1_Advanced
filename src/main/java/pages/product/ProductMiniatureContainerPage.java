@@ -36,7 +36,7 @@ public class ProductMiniatureContainerPage extends BasePage {
     }
 
 
-    public void selectProduct(String expectedName) {
+    public void selectProductByName(String expectedName) {
         for (ProductMiniaturePage productMiniature : getProductMiniatures()) {
             if (productMiniature.getName() != null && expectedName.equalsIgnoreCase(productMiniature.getName())) {
                 click(productMiniature.getIcon());
@@ -44,6 +44,11 @@ public class ProductMiniatureContainerPage extends BasePage {
             }
         }
     }
+
+    public void selectProductByIndex(int index) {
+       click(getProductMiniatures().get(index).getIcon());
+    }
+
 
     public String getProductName(int index) {
         return getProductMiniatures().get(index).getName();
