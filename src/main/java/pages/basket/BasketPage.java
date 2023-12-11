@@ -7,6 +7,7 @@ import models.BasketLine;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 
 import java.math.BigDecimal;
@@ -45,7 +46,7 @@ public class BasketPage extends BasePage {
     }
 
     public BigDecimal getTotalSumOfBasketLines(){
-        BigDecimal totalSum = BigDecimal.ZERO.setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal totalSum = convertIntToBigDecimal(0);
 
         for(BasketLine basketLine : getBasketLinesInBasket()) {
             totalSum = totalSum.add(basketLine.getTotalPrice());

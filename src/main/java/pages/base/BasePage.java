@@ -109,6 +109,7 @@ public class BasePage {
     }
 
     public BigDecimal getPriceFromElement(WebElement element) {
+        waitToBeVisible(element);
         return deleteCurrency(getText(element));
     }
 

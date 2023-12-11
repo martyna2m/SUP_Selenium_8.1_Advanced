@@ -23,6 +23,8 @@ users:
 testData:
   lowerPriceFilter: 13
   higherPriceFilter: 15
+  quantity: 2
+  numberOfProducts: 2
   country: United States
   postalCode: 85001
   state: Arizona

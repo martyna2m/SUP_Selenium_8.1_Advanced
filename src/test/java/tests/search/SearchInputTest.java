@@ -41,7 +41,6 @@ public class SearchInputTest extends TestBase {
                 .getSuggestedProductNames();
 
         for (String name : suggestedProductNames) {
-            System.out.println(name);
             Assertions.assertThat(name.contains(searchedProduct)).isTrue();
         }
 

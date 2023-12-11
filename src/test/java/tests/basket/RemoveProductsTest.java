@@ -16,28 +16,29 @@ public class RemoveProductsTest extends Steps {
 
     @Test
     public void removeAddedProductsFromBasket() throws InterruptedException {
-        int expectedQuantity = 2;
+        int expectedQuantity = Integer.parseInt(testDataProvider.getTestData("quantity"));
+        int expectedNumberOfProducts = 2;
+                //Integer.parseInt(testDataProvider.getTestData("numberOfProducts"));
 
         openPage("homePage");
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < expectedNumberOfProducts; i++) {
             addRandomProductToBasketAndReturnToHomePage(expectedQuantity);
         }
         openPage("basketPage");
         Assertions.assertThat(at(BasketPage.class).checkIfTotalPriceIsCorrect()).isTrue();
 
 
-        for (int j = 0; j < 2; j++) {
-            Thread.sleep(1000);
+        for (int j = 0; j < expectedNumberOfProducts; j++) {
             List<BasketLinePage> basketLinePages = at(BasketPage.class).getBasketLinePages();
 
             if (!basketLinePages.isEmpty()) {
                 basketLinePages.get(0).deleteBasketLine();
+                Thread.sleep(1000);
                 Assertions.assertThat(at(BasketPage.class).checkIfTotalPriceIsCorrect()).isTrue();
 
             }
 
         }
-        Thread.sleep(1000);
         Assertions.assertThat(at(TopGridPage.class).getNumberOfItemsInBasket()).isEqualTo(0);
     }
 
