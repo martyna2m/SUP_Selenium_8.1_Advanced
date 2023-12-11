@@ -10,19 +10,18 @@ public class ShippingSectionPage extends BasePage {
     @FindBy(css = "#delivery_option_2")
     private WebElement myCarrierOption;
 
-      @FindBy(css = "[name='confirmDeliveryOption']")
+    @FindBy(css = "[name='confirmDeliveryOption']")
     private WebElement continueBtn;
 
 
-
     public ShippingSectionPage chooseShippingMethod() {
-        if (!myCarrierOption.isSelected()) {
+        if (!myCarrierOption.isSelected()){
             click(myCarrierOption);
         }
         return this;
     }
 
-    public void clickContinue(){
+    public void clickContinue() {
         click(continueBtn);
     }
 

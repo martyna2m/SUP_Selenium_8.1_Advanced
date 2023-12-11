@@ -11,6 +11,7 @@ public class User {
     private Gender gender;
     private String birthdate;
 
+
     @Override
     public String toString() {
         return "User{" +
@@ -21,6 +22,10 @@ public class User {
                 ", password='" + password + '\'' +
                 ", birthdate='" + birthdate + '\'' +
                 '}';
+    }
+
+    public String getFullName(){
+       return getFirstName() + " " + getLastName();
     }
     private User() {
     }

@@ -1,4 +1,4 @@
-package pages.product;
+package pages.categories;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +32,7 @@ public class SideFilterMenuPage extends BasePage {
     @FindBy(css = ".ui-slider>a")
     private List<WebElement> sliderHandles;
 
-    @FindBy(css = "div.faced-overlay")
+    @FindBy(css = ".spinner")
     private WebElement spinner;
 
 
@@ -46,15 +46,6 @@ public class SideFilterMenuPage extends BasePage {
     }
 
 
-    public WebElement getFilterSection(String sectionName) {
-        for (WebElement section : filterSections) {
-            String name = getText(section);
-            if (name != null && name.equalsIgnoreCase(sectionName)) {
-                return section;
-            }
-        }
-        return null;
-    }
 
     public String getPriceRangeText() {
         return getText(priceRangeInfo);
@@ -80,30 +71,26 @@ public class SideFilterMenuPage extends BasePage {
         return prices;
     }
 
-//    public void setPriceFilter(int expectedLowerPrice, int expectedHigherPrice) {
-//        List<BigDecimal> prices = getPricesFromRangeFilter();
-//
-//        while (!Objects.equals(prices.get(0), BigDecimal.valueOf(expectedLowerPrice))) {
-//            WebElement leftHandle = sliderHandles.get(0);
-//            actions.clickAndHold(leftHandle);
-//            leftHandle.sendKeys(Keys.ARROW_RIGHT);
-//            getPriceRangeText();
-//            prices = getPricesFromRangeFilter();
-//            defaultWait.until(ExpectedConditions.invisibilityOf(spinner));
-//            defaultWait.until(ExpectedConditions.elementToBeClickable(leftHandle));
-//
-//            while (!Objects.equals(prices.get(1), BigDecimal.valueOf(expectedHigherPrice))) {
-//                WebElement rightHandle = sliderHandles.get(1);
-//                actions.clickAndHold(rightHandle);
-//                rightHandle.sendKeys(Keys.ARROW_LEFT);
-//                getPriceRangeText();
-//                prices = getPricesFromRangeFilter();
-//                defaultWait.until(ExpectedConditions.invisibilityOf(spinner));
-//                defaultWait.until(ExpectedConditions.elementToBeClickable(rightHandle));
-//            }
-//
- //       }
- //   }
+    public void setPriceFilter(int expectedLowerPrice, int expectedHigherPrice) {
+        List<BigDecimal> prices = getPricesFromRangeFilter();
+
+        while (!Objects.equals(prices.get(0), convertIntToBigDecimal(expectedLowerPrice))) {
+            WebElement leftHandle = sliderHandles.get(0);
+            actions.clickAndHold(leftHandle);
+            leftHandle.sendKeys(Keys.ARROW_RIGHT);
+            defaultWait.until(ExpectedConditions.invisibilityOf(spinner));
+            prices = getPricesFromRangeFilter();
+
+            while (!Objects.equals(prices.get(1), convertIntToBigDecimal(expectedHigherPrice))) {
+                WebElement rightHandle = sliderHandles.get(1);
+                actions.clickAndHold(rightHandle);
+                rightHandle.sendKeys(Keys.ARROW_LEFT);
+                defaultWait.until(ExpectedConditions.invisibilityOf(spinner));
+                prices = getPricesFromRangeFilter();
+            }
+
+        }
+    }
 
 
 }

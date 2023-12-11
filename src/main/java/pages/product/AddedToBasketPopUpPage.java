@@ -46,7 +46,7 @@ public class AddedToBasketPopUpPage extends BasePage {
     private WebElement proceedToCheckOutBtn;
 
     public BasketLine toBasketLine() {
-        return new BasketLine(new Product(this.addedProductName.getText(), getPrice(this.addedProductPrice)), getIntNumberFromText(this.addedProductQuantity), getTotalPrice(getPrice(this.addedProductPrice), getIntNumberFromText(this.addedProductQuantity)));
+        return new BasketLine(new Product(this.addedProductName.getText(), getPriceFromElement(this.addedProductPrice)), getIntNumberFromText(this.addedProductQuantity), getTotalPrice(getPriceFromElement(this.addedProductPrice), getIntNumberFromText(this.addedProductQuantity)));
 
     }
 

@@ -1,12 +1,11 @@
 package tests.basket;
 
-import models.Basket;
 import models.BasketLine;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pages.commons.TopGridPage;
 import pages.product.AddedToBasketPopUpPage;
-import pages.product.CategoryPage;
+import pages.categories.CategoryPage;
 import pages.product.ProductDetailsPage;
 import tests.base.TestBase;
 

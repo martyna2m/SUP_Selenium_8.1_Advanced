@@ -30,15 +30,15 @@ public class BasketSideGridPage extends BasePage {
     }
 
     public BigDecimal getBasketTotalSum() {
-        return getPrice(basketTotal);
+        return getPriceFromElement(basketTotal);
     }
 
     public BigDecimal getProductsTotalSum() {
-        return getPrice(totalOfProducts);
+        return getPriceFromElement(totalOfProducts);
     }
 
     public BigDecimal getShippingTotal() {
-        return getPrice(totalOfShipping);
+        return getPriceFromElement(totalOfShipping);
     }
 
 }

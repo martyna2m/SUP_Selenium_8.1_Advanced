@@ -6,6 +6,8 @@ url:
   loginPage: ?controller=authentication&back=my-account
   basketPage: ?controller=cart&action=show
   accessoriesPage: ?id_category=6&controller=category&id_lang=2
+  myAccountPage: ?controller=my-account
+  createAccountPage: ?controller=authentication&create_account=1
   artPage: ?id_category=9&controller=category&id_lang=2
 
 users:
@@ -19,10 +21,13 @@ users:
 
 
 testData:
+  lowerPriceFilter: 13
+  higherPriceFilter: 15
   country: United States
   postalCode: 85001
   state: Arizona
   posterName: THE BEST IS YET POSTER
+  paymentStatus: Awaiting check payment
 
 
 

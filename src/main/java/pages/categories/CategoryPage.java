@@ -1,7 +1,8 @@
-package pages.product;
+package pages.categories;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +28,9 @@ public class CategoryPage extends BasePage {
     @FindBy(css = ".total-products")
     private WebElement totalNumberOfProductsInfo;
 
+    @FindBy(css = "#js-active-search-filters>ul>li")
+    private List<WebElement> activeFilters;
+
 
     public CategoryPage(WebDriver driver) {
         super(driver);
@@ -39,6 +43,15 @@ public class CategoryPage extends BasePage {
 
     public String getTotalNumberOfProductsInfo() {
         return getText(totalNumberOfProductsInfo);
+    }
+
+    public CategoryPage deleteFilter(String filterName){
+      for(WebElement filter : activeFilters){
+          if (getText(filter).toLowerCase().contains(filterName.toLowerCase())){
+             click(filter.findElement(By.cssSelector("a>i")));
+          }
+      }
+      return this;
     }
 
 }

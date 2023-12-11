@@ -2,7 +2,6 @@ package pages.checkout;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,11 +13,11 @@ import java.util.List;
 @Setter
 public class CheckOutPage extends BasePage {
 
+
     AddressesSectionPage addressesSectionPage = new AddressesSectionPage(driver);
 
     @FindBy(css = ".cart-grid-body>section")
     private List<WebElement> sections;
-
 
 
     public CheckOutPage(WebDriver driver) {

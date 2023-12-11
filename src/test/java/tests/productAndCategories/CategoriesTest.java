@@ -3,8 +3,8 @@ package tests.productAndCategories;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pages.commons.TopMenuPage;
-import pages.product.CategoryPage;
-import pages.product.SideFilterMenuPage;
+import pages.categories.CategoryPage;
+import pages.categories.SideFilterMenuPage;
 import tests.base.TestBase;
 
 import java.util.List;

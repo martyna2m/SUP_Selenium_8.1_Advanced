@@ -1,8 +1,10 @@
 package tests.checkout;
 
+import models.Address;
 import models.User;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pages.account.LogInPage;
+import pages.account.*;
 import pages.basket.BasketSideGridPage;
 import pages.checkout.CheckOutPage;
 import pages.checkout.OrderConfirmedPage;
@@ -15,7 +17,7 @@ import steps.Steps;
 
 public class CheckOutTest extends Steps {
     @Test
-    public void checkOutTest() {
+    public void checkOutTest() throws InterruptedException {
 
         String categoryName = "Art";
         String productName = "THE BEST IS YET POSTER";
@@ -39,21 +41,46 @@ public class CheckOutTest extends Steps {
         at(BasketSideGridPage.class)
                 .proceedToCheckout();
 
-        at(CheckOutPage.class)
+        Address usedAddress = at(CheckOutPage.class)
                 .getAddressesSectionPage()
-                .clickAddressDiffers()
-                .fillTheForm();
+                .clickAddNewInvoiceAddress()
+                .getAddressesSectionFormPage()
+                .fillTheFormWithFakeAddress();
+
 
         at(ShippingSectionPage.class)
                 .chooseShippingMethod()
                 .clickContinue();
+
 
         at(PaymentSectionPage.class)
                 .selectPaymentOption()
                 .agreeToTerms()
                 .placeOrder();
 
-        String referenceNumber = at(OrderConfirmedPage.class).getReferenceNumber();
+        String expectedOrderDetails = at(OrderConfirmedPage.class).getOrderDetails();
+
+        openPage("myAccountPage");
+        at(MyAccountPage.class).goToOrderHistory();
+        OrderRowPage recentOrder = at(OrderHistoryPage.class).getRows().get(0);
+
+        String actualOrderDetails = recentOrder.getHistoricalOrderDetails();
+        String invoiceStatus = recentOrder.getInvoiceStatus();
+
+        recentOrder.goToDetails();
+
+
+        String deliveryAddressDetails = at(OrderDetails.class).getNameFromDeliveryAddress();
+        String invoiceAddressDetails = at(OrderDetails.class).getNameFromInvoiceAddress();
+
+
+        Assertions.assertThat(expectedOrderDetails).isEqualTo(actualOrderDetails);
+        Assertions.assertThat(invoiceStatus).isEqualTo(testDataProvider.getTestData("paymentStatus"));
+
+        Assertions.assertThat(deliveryAddressDetails).contains(user1.getFullName());
+        Assertions.assertThat(invoiceAddressDetails).contains(user1.getFullName());
+
+        Assertions.assertThat(invoiceAddressDetails).contains(usedAddress.getAddress(), usedAddress.getCity(), usedAddress.getPostalCode(), usedAddress.getCountry());
 
 
     }

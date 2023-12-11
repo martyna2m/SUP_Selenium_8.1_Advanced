@@ -3,7 +3,7 @@ package steps;
 import pages.commons.TopMenuPage;
 import pages.home.HomePage;
 import pages.product.AddedToBasketPopUpPage;
-import pages.product.CategoryPage;
+import pages.categories.CategoryPage;
 import pages.product.ProductDetailsPage;
 import tests.base.TestBase;
 

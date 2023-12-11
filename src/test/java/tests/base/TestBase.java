@@ -11,6 +11,7 @@ import pages.base.BasePage;
 import providers.TestDataProvider;
 import providers.UrlProvider;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class TestBase {
@@ -45,6 +46,11 @@ public class TestBase {
       UrlProvider urlProvider = new UrlProvider();
        String selectedUrl = urlProvider.getUrl(urlKey);
         driver.get(selectedUrl);
+    }
+
+    public BigDecimal convertIntToBigDecimal(int intValue){
+        return BigDecimal.valueOf(intValue).setScale(2);
+
     }
 
 

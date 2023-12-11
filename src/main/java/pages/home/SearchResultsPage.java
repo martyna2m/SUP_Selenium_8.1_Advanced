@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import pages.base.BasePage;
 import pages.commons.TopGridPage;
 import pages.commons.TopMenuPage;
-import pages.product.ProductMiniatureContainerPage;
+import pages.categories.ProductMiniatureContainerPage;
 @Getter
 @Setter
 public class SearchResultsPage extends BasePage {

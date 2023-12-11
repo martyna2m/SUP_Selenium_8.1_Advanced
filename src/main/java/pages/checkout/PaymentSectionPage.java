@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 
 @Getter
@@ -11,7 +12,7 @@ import pages.base.BasePage;
 public class PaymentSectionPage extends BasePage {
 
     @FindBy(css = "#payment-option-1")
-    private WebElement paymentOption;
+    private WebElement payByCheckOptionBtn;
 
 
     @FindBy(css = ".custom-checkbox>input")
@@ -25,13 +26,13 @@ public class PaymentSectionPage extends BasePage {
     }
 
     public PaymentSectionPage selectPaymentOption() {
-        click(paymentOption);
+      clickWithoutWait(payByCheckOptionBtn);
         return this;
     }
 
 
     public PaymentSectionPage agreeToTerms() {
-        click(acceptTermsCheckBox);
+        clickWithoutWait(acceptTermsCheckBox);
         return this;
     }
 

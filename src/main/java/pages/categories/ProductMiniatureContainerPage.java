@@ -1,4 +1,4 @@
-package pages.product;
+package pages.categories;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

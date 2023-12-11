@@ -56,6 +56,11 @@ public class BasePage {
         element.click();
     }
 
+    public void clickWithoutWait(WebElement element) {
+        element.click();
+    }
+
+
     public void sendKeys(WebElement element, String phrase) {
         // add conditions
         waitToBeClickable(element);
@@ -69,6 +74,7 @@ public class BasePage {
 
 
     public String getText(WebElement element) {
+        waitToBeVisible(element);
         return element.getText();
     }
 
@@ -80,13 +86,10 @@ public class BasePage {
         defaultWait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-
-    public void executeInFrame(WebElement frame, Runnable runnable) {
-        driver.switchTo().frame(frame);
-        runnable.run();
-        driver.switchTo().defaultContent();
-        //if not used, delete
+    public void waitToBeVisible(WebElement element) {
+        defaultWait.until(ExpectedConditions.visibilityOf(element));
     }
+
 
     public static BigDecimal deleteCurrency(String priceWithCurrency) {
         Pattern pattern = Pattern.compile("\\$\\d+\\.\\d{2}");
@@ -100,8 +103,12 @@ public class BasePage {
             return BigDecimal.ZERO;
         }
     }
+    public BigDecimal convertIntToBigDecimal(int intValue){
+        return BigDecimal.valueOf(intValue).setScale(2);
 
-    public BigDecimal getPrice(WebElement element) {
+    }
+
+    public BigDecimal getPriceFromElement(WebElement element) {
         return deleteCurrency(getText(element));
     }
 

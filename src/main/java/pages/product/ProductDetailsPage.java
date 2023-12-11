@@ -75,11 +75,11 @@ public class ProductDetailsPage extends BasePage {
     public BasketLine addProductToBasket() {
         if (isProductInBasket(getText(this.nameLabel))) {
             BasketLine exisitingBasketLine = findProductInBasket(getText(this.nameLabel));
-            exisitingBasketLine.increaseQuantityAndTotalPrice(getIntNumberFromValue(quantityInput), getTotalPrice(getPrice(currentPrice), getIntNumberFromValue(quantityInput)));
+            exisitingBasketLine.increaseQuantityAndTotalPrice(getIntNumberFromValue(quantityInput), getTotalPrice(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
             click(addToBasketBtn);
             return exisitingBasketLine;
         } else {
-            BasketLine expectedBasketLine = new BasketLine(new Product(getText(nameLabel), getPrice(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPrice(getPrice(currentPrice), getIntNumberFromValue(quantityInput)));
+            BasketLine expectedBasketLine = new BasketLine(new Product(getText(nameLabel), getPriceFromElement(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPrice(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
             basket.addBasketLineToBasket(expectedBasketLine);
             click(addToBasketBtn);
             return expectedBasketLine;

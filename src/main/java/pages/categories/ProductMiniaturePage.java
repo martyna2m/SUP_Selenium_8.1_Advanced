@@ -1,16 +1,15 @@
-package pages.product;
+package pages.categories;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bouncycastle.crypto.paddings.TBCPadding;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import pages.base.BasePage;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 @Getter
 @Setter
 public class ProductMiniaturePage extends BasePage {
@@ -40,9 +39,12 @@ public class ProductMiniaturePage extends BasePage {
     @FindBy(css = "div>.color")
     List<WebElement> colorOptions;
 
-    public String getName(){
-       return getText(this.nameLabel);
+    public String getName() {
+        return getText(this.nameLabel);
     }
 
+    public BigDecimal getCurrentProductPrice() {
+        return getPriceFromElement(currentPrice);
+    }
 
 }
