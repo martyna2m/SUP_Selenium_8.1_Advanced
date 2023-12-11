@@ -10,14 +10,19 @@ import java.util.List;
 
 public class FiltersTest extends TestBase {
     @Test
-    public void setFilters() throws InterruptedException {
+    public void setFilters() {
         int lowerPriceFilter = Integer.parseInt(testDataProvider.getTestData("lowerPriceFilter"));
         int higherFilterPrice = Integer.parseInt(testDataProvider.getTestData("higherPriceFilter"));
         openPage("accessoriesPage");
 
-        int initialNumberOfProducts = at(CategoryPage.class).getProductMiniatureContainerPage().getProductMiniatures().size();
+        int initialNumberOfProducts =
+                at(CategoryPage.class)
+                        .getProductMiniatureContainerPage()
+                        .getProductMiniatures().size();
 
-        at(CategoryPage.class).getSideFilterMenuPage().setPriceFilter(13, 15);
+        at(CategoryPage.class)
+                .getSideFilterMenuPage()
+                .setPriceFilter(13, 15);
 
         List<ProductMiniaturePage> filteredProductMiniatures = at(CategoryPage.class).getProductMiniatureContainerPage().getProductMiniatures();
         for (ProductMiniaturePage productMiniature : filteredProductMiniatures) {

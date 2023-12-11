@@ -1,5 +1,6 @@
 package pages.product;
 
+import lombok.Getter;
 import models.BasketLine;
 import models.Product;
 import org.openqa.selenium.By;
@@ -8,11 +9,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
-
+@Getter
 public class AddedToBasketPopUpPage extends BasePage {
     public AddedToBasketPopUpPage(WebDriver driver) {
         super(driver);
     }
+
+    @FindBy(xpath = "//*[@id='blockcart-modal']//*[@class='modal-dialog']//*[@class='modal-content']")
+    private WebElement popUpWindow;
 
     @FindBy(css = "#myModalLabel")
     private WebElement successAlert;
@@ -50,11 +54,6 @@ public class AddedToBasketPopUpPage extends BasePage {
 
     }
 
-    public AddedToBasketPopUpPage waitForPopUp() throws InterruptedException {
-        Thread.sleep(1000);
-        defaultWait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id='blockcart-modal']//*[@class='modal-dialog']//*[@class='modal-content']"))));
-        return this;
-    }
 
     public void clickProceedToCheckout() {
         click(proceedToCheckOutBtn);

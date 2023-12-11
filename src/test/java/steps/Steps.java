@@ -1,9 +1,9 @@
 package steps;
 
+import pages.categories.CategoryPage;
 import pages.commons.TopMenuPage;
 import pages.home.HomePage;
 import pages.product.AddedToBasketPopUpPage;
-import pages.categories.CategoryPage;
 import pages.product.ProductDetailsPage;
 import tests.base.TestBase;
 
@@ -23,14 +23,13 @@ public class Steps extends TestBase {
                 .addProductToBasket();
 
         at(AddedToBasketPopUpPage.class)
-                .waitForPopUp()
                 .clickContinueShopping();
 
         at(ProductDetailsPage.class).returnToHomePage();
 
     }
 
-    public void chooseCategoryAndProduct(String categoryName, String productName){
+    public void chooseCategoryAndProduct(String categoryName, String productName) {
         at(TopMenuPage.class)
                 .goToCategoryPage(categoryName);
 

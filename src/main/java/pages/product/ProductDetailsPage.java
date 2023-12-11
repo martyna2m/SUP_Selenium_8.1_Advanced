@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import models.BasketLine;
 import models.Product;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import pages.base.BasePage;
 
@@ -17,6 +19,7 @@ public class ProductDetailsPage extends BasePage {
         super(driver);
     }
 
+    private AddedToBasketPopUpPage addedToBasketPopUpPage = new AddedToBasketPopUpPage(driver);
 
     @FindBy(xpath = "//*[@id='main']//h1")
     private WebElement nameLabel;
@@ -71,17 +74,18 @@ public class ProductDetailsPage extends BasePage {
     }
 
 
-
     public BasketLine addProductToBasket() {
         if (isProductInBasket(getText(this.nameLabel))) {
             BasketLine exisitingBasketLine = findProductInBasket(getText(this.nameLabel));
             exisitingBasketLine.increaseQuantityAndTotalPrice(getIntNumberFromValue(quantityInput), getTotalPrice(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
             click(addToBasketBtn);
+            waitForPopUp();
             return exisitingBasketLine;
         } else {
             BasketLine expectedBasketLine = new BasketLine(new Product(getText(nameLabel), getPriceFromElement(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPrice(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
             basket.addBasketLineToBasket(expectedBasketLine);
             click(addToBasketBtn);
+            waitForPopUp();
             return expectedBasketLine;
         }
     }
@@ -100,5 +104,9 @@ public class ProductDetailsPage extends BasePage {
         }
         return null;
 
+    }
+
+    public void waitForPopUp(){
+        defaultWait.until(ExpectedConditions.visibilityOf(addedToBasketPopUpPage.getPopUpWindow()));
     }
 }
