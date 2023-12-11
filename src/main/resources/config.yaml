@@ -18,6 +18,11 @@ users:
     birthdate: 05/01/1970
 
 
+testData:
+  country: United States
+  postalCode: 85001
+  state: Arizona
+
 
 
 

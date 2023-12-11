@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DataFaker {
-    private Faker faker = new Faker();
-    private FakeValuesService fakeValuesService = new FakeValuesService(new Locale("en-GB"), new RandomService());
+    private Faker faker =  new Faker(new Locale("en-US"));
+    private FakeValuesService fakeValuesService = new FakeValuesService(new Locale("en-US"), new RandomService());
 
     public String getFakeFirstName() {
         return faker.name().firstName();
@@ -20,14 +20,29 @@ public class DataFaker {
     public String getFakeLastName() {
         return faker.name().lastName();
     }
+  public String getFakeAddress() {
+        return faker.address().streetAddress() + " " + faker.address().buildingNumber();
+    }
 
-    ;
+    public String getFakeCity(){
+       return faker.address().city();
+    }
+
+     public String getFakePhoneNumber(){
+       return fakeValuesService.numerify("[1-9]{9}");
+    }
+
+
+
+    public String getFakeCompanyName(){
+        return faker.company().name();
+    }
 
     public String getFakeEmail() {
         return fakeValuesService.bothify("??????##@example.com");
     }
 
-    ;
+
 
     public String getFakePassword() {
         return fakeValuesService.regexify("[a-z1-9]{8}");

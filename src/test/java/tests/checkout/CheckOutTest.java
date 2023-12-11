@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import pages.account.LogInPage;
 import pages.basket.BasketSideGridPage;
 import pages.checkout.CheckOutPage;
+import pages.checkout.ShippingSectionPage;
 import pages.product.AddedToBasketPopUpPage;
 import pages.product.ProductDetailsPage;
 import providers.UserFactory;
@@ -38,7 +39,15 @@ public class CheckOutTest extends Steps {
 
         at(CheckOutPage.class)
                 .getAddressesSectionPage()
-                .clickAddressDiffers();
+                .clickAddressDiffers()
+                .fillTheForm();
+
+    at(ShippingSectionPage.class)
+            .chooseShippingMethod()
+            .clickContinue();
+
+
+
 
 
 

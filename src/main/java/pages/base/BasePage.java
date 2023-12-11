@@ -1,5 +1,6 @@
 package pages.base;
 
+import jdk.incubator.vector.VectorOperators;
 import lombok.Getter;
 import lombok.Setter;
 import models.Basket;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import providers.TestDataProvider;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -26,6 +28,7 @@ public class BasePage {
     public Actions actions;
     public WebDriverWait defaultWait;
     public Basket basket;
+    public TestDataProvider testDataProvider;
 
 
     public BasePage(WebDriver driver) {
@@ -44,6 +47,7 @@ public class BasePage {
         this.actions = new Actions(driver);
         this.defaultWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.basket = Basket.getInstance();
+        this.testDataProvider = new TestDataProvider();
 
         // get 10 from yaml
     }

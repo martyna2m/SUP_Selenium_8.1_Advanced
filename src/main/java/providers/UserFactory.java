@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class UserFactory {
     private DataFaker dataFaker = new DataFaker();
-    private TestDataProvider testDataProvider = new TestDataProvider();
 
 
     public User getRandomUser() {
