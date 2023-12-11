@@ -10,8 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.base.BasePage;
 
-import java.util.List;
-
 @Getter
 @Setter
 public class ProductDetailsPage extends BasePage {
@@ -53,7 +51,7 @@ public class ProductDetailsPage extends BasePage {
         return this;
     }
 
-    public void returnToHomePage(){
+    public void returnToHomePage() {
         click(homeBtn);
     }
 
@@ -72,34 +70,35 @@ public class ProductDetailsPage extends BasePage {
         } else return this.quantityDownBtn;
     }
 
+
+
     public BasketLine addProductToBasket() {
-        if (isProductInBasket()) {
-            for (BasketLine basketLine : basket.getExpectedBasketLines()) {
-                if ((basketLine.getProduct().getName()).equals(getText(nameLabel))) {
-                    basketLine.increaseQuantityAndTotalPrice(getIntNumberFromValue(quantityInput),getTotalPrice(getPrice(currentPrice), getIntNumberFromValue(quantityInput)) );
-                    click(addToBasketBtn);
-                    return basketLine;
-                }
-            }
+        if (isProductInBasket(getText(this.nameLabel))) {
+            BasketLine exisitingBasketLine = findProductInBasket(getText(this.nameLabel));
+            exisitingBasketLine.increaseQuantityAndTotalPrice(getIntNumberFromValue(quantityInput), getTotalPrice(getPrice(currentPrice), getIntNumberFromValue(quantityInput)));
+            click(addToBasketBtn);
+            return exisitingBasketLine;
         } else {
             BasketLine expectedBasketLine = new BasketLine(new Product(getText(nameLabel), getPrice(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPrice(getPrice(currentPrice), getIntNumberFromValue(quantityInput)));
             basket.addBasketLineToBasket(expectedBasketLine);
             click(addToBasketBtn);
             return expectedBasketLine;
         }
-        return null;
     }
 
 
-    public boolean isProductInBasket() {
-        boolean isAdded = false;
+    public boolean isProductInBasket(String productName) {
+        return findProductInBasket(productName) != null;
+    }
+
+
+    public BasketLine findProductInBasket(String productName) {
         for (BasketLine basketLine : basket.getExpectedBasketLines()) {
-            if ((basketLine.getProduct().getName()).equals(getText(this.nameLabel))) {
-                isAdded = true;
+            if ((basketLine.getProduct().getName()).equals(productName)) {
+                return basketLine;
             }
         }
-        return isAdded;
+        return null;
+
     }
-
-
 }

@@ -3,6 +3,7 @@ package pages.base;
 import lombok.Getter;
 import lombok.Setter;
 import models.Basket;
+import models.BasketLine;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -26,6 +27,7 @@ public class BasePage {
     public WebDriverWait defaultWait;
     public Basket basket;
 
+
     public BasePage(WebDriver driver) {
         init(driver);
         PageFactory.initElements(driver, this);
@@ -42,6 +44,7 @@ public class BasePage {
         this.actions = new Actions(driver);
         this.defaultWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.basket = Basket.getInstance();
+
         // get 10 from yaml
     }
 

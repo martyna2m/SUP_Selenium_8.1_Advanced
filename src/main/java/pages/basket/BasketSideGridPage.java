@@ -16,6 +16,14 @@ public class BasketSideGridPage extends BasePage {
     @FindBy(css = ".cart-total>.value")
     private WebElement basketTotal;
 
+    @FindBy(xpath = "//*[contains(@class,'checkout')]//a")
+    private WebElement proceedToCheckoutBtn;
+
+
+    public void proceedToCheckout() {
+        click(proceedToCheckoutBtn);
+    }
+
     public BasketSideGridPage(WebDriver driver) {
         super(driver);
 

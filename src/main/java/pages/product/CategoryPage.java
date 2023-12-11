@@ -15,7 +15,7 @@ public class CategoryPage extends BasePage {
 
     ProductMiniatureContainerPage productMiniatureContainerPage = new ProductMiniatureContainerPage(driver);
 
-    private SideFilterMenuPage sideFilterMenuPage = new SideFilterMenuPage(driver);
+    SideFilterMenuPage sideFilterMenuPage = new SideFilterMenuPage(driver);
 
 
     @FindBy(css = ".h1")

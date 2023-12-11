@@ -1,7 +1,9 @@
 package steps;
 
+import pages.commons.TopMenuPage;
 import pages.home.HomePage;
 import pages.product.AddedToBasketPopUpPage;
+import pages.product.CategoryPage;
 import pages.product.ProductDetailsPage;
 import tests.base.TestBase;
 
@@ -28,4 +30,12 @@ public class Steps extends TestBase {
 
     }
 
+    public void chooseCategoryAndProduct(String categoryName, String productName){
+        at(TopMenuPage.class)
+                .goToCategoryPage(categoryName);
+
+        at(CategoryPage.class)
+                .getProductMiniatureContainerPage()
+                .selectProductByName(productName);
+    }
 }

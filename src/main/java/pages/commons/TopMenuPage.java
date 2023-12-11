@@ -87,7 +87,6 @@ public class TopMenuPage extends BasePage {
 
     public void goToCategoryPage(String categoryName) {
         click(chooseCategory(categoryName));
-
     }
 
 

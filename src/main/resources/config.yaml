@@ -3,7 +3,7 @@ browser: chrome
 url:
   homePage: http://146.59.32.4/index.php
   contactUsPage: ?controller=contact
-  signInPage: ?controller=authentication&back=my-account
+  loginPage: ?controller=authentication&back=my-account
   basketPage: ?controller=cart&action=show
   accessoriesPage: ?id_category=6&controller=category&id_lang=2
   artPage: ?id_category=9&controller=category&id_lang=2

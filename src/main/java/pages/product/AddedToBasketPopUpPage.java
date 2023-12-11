@@ -56,7 +56,7 @@ public class AddedToBasketPopUpPage extends BasePage {
         return this;
     }
 
-    public void goToBasket() {
+    public void clickProceedToCheckout() {
         click(proceedToCheckOutBtn);
     }
 
