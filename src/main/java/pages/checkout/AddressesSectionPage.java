@@ -31,7 +31,7 @@ public class AddressesSectionPage extends BasePage {
     private WebElement companyNameInput;
 
 
-    @FindBy(css = "#id_state")
+    @FindBy(css = "[name= 'id_state']")
     private WebElement stateSelect;
 
 

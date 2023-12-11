@@ -1,10 +1,8 @@
 package pages.base;
 
-import jdk.incubator.vector.VectorOperators;
 import lombok.Getter;
 import lombok.Setter;
 import models.Basket;
-import models.BasketLine;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;

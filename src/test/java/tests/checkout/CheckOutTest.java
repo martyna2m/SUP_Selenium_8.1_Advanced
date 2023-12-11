@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import pages.account.LogInPage;
 import pages.basket.BasketSideGridPage;
 import pages.checkout.CheckOutPage;
+import pages.checkout.OrderConfirmedPage;
+import pages.checkout.PaymentSectionPage;
 import pages.checkout.ShippingSectionPage;
 import pages.product.AddedToBasketPopUpPage;
 import pages.product.ProductDetailsPage;
@@ -42,18 +44,16 @@ public class CheckOutTest extends Steps {
                 .clickAddressDiffers()
                 .fillTheForm();
 
-    at(ShippingSectionPage.class)
-            .chooseShippingMethod()
-            .clickContinue();
+        at(ShippingSectionPage.class)
+                .chooseShippingMethod()
+                .clickContinue();
 
+        at(PaymentSectionPage.class)
+                .selectPaymentOption()
+                .agreeToTerms()
+                .placeOrder();
 
-
-
-
-
-
-
-
+        String referenceNumber = at(OrderConfirmedPage.class).getReferenceNumber();
 
 
     }

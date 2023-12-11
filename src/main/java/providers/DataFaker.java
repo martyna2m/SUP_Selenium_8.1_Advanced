@@ -29,7 +29,7 @@ public class DataFaker {
     }
 
      public String getFakePhoneNumber(){
-       return fakeValuesService.numerify("[1-9]{9}");
+       return faker.numerify("###-###-###");
     }
 
 

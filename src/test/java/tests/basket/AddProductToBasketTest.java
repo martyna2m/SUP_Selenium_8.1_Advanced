@@ -14,9 +14,8 @@ public class AddProductToBasketTest extends TestBase {
 
     @Test
     public void addProductToBasket() throws InterruptedException {
-        String expectedProductName = "THE BEST IS YET POSTER";
+        String expectedProductName = testDataProvider.getTestData("posterName");
         int expectedQuantity = 3;
-        //pobieranie z yamla
 
         openPage("artPage");
 

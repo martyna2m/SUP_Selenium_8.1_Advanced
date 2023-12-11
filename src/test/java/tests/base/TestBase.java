@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import pages.base.BasePage;
+import providers.TestDataProvider;
 import providers.UrlProvider;
 
 import java.util.Objects;
@@ -17,6 +18,8 @@ public class TestBase {
     protected static WebDriver driver;
     protected static Browser activeBrowser;
     protected static DriverFactory driverFactory = new DriverFactory();
+
+    protected static TestDataProvider testDataProvider = new TestDataProvider();
 
 
     @BeforeAll
