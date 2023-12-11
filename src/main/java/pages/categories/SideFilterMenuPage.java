@@ -46,7 +46,6 @@ public class SideFilterMenuPage extends BasePage {
     }
 
 
-
     public String getPriceRangeText() {
         return getText(priceRangeInfo);
     }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FiltersTest extends TestBase {
     @Test
-    public void setFilters() {
+    public void setFilters() throws InterruptedException {
         int lowerPriceFilter = Integer.parseInt(testDataProvider.getTestData("lowerPriceFilter"));
         int higherFilterPrice = Integer.parseInt(testDataProvider.getTestData("higherPriceFilter"));
         openPage("accessoriesPage");

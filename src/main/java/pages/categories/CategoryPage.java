@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 
 import java.util.List;
@@ -31,6 +32,9 @@ public class CategoryPage extends BasePage {
     @FindBy(css = "#js-active-search-filters>ul>li")
     private List<WebElement> activeFilters;
 
+    @FindBy(css = ".spinner")
+    private WebElement spinner;
+
 
     public CategoryPage(WebDriver driver) {
         super(driver);
@@ -50,6 +54,7 @@ public class CategoryPage extends BasePage {
           if (getText(filter).toLowerCase().contains(filterName.toLowerCase())){
              click(filter.findElement(By.cssSelector("a>i")));
           }
+          defaultWait.until(ExpectedConditions.invisibilityOf(spinner));
       }
       return this;
     }
