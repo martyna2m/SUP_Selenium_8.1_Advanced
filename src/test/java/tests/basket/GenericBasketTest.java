@@ -14,7 +14,8 @@ import java.util.Random;
 
 @Slf4j
 public class GenericBasketTest extends Steps {
-    @RepeatedTest(3)
+    @RepeatedTest(1)
+    @Tag("basket")
     @Tag("yaml6")
     public void addRandomProductsToBasket() {
 

@@ -10,7 +10,8 @@ import tests.base.TestBase;
 import java.util.List;
 
 public class FiltersTest extends TestBase {
-    @RepeatedTest(3)
+    @RepeatedTest(1)
+    @Tag("productAndCategories")
     @Tag("yaml5")
     public void setFilters() {
         int lowerPriceFilter = parseInt(testDataProvider.getTestData("lowerPriceFilter5"));

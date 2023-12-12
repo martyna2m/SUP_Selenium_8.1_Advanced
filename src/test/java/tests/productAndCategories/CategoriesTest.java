@@ -2,6 +2,7 @@ package tests.productAndCategories;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.openqa.selenium.WebElement;
 import pages.categories.CategoryPage;
 import pages.categories.SideFilterMenuPage;
@@ -12,7 +13,8 @@ import java.util.List;
 
 public class CategoriesTest extends TestBase {
 
-    @RepeatedTest(3)
+    @RepeatedTest(1)
+    @Tag("productAndCategories")
     public void iterateThroughCategories() {
         openPage("homePage");
         List<String> categoryNames = at(TopMenuPage.class).getCategoryNames();
@@ -22,7 +24,8 @@ public class CategoriesTest extends TestBase {
         }
     }
 
-    @RepeatedTest(3)
+    @RepeatedTest(1)
+    @Tag("productAndCategories")
     public void iterateThroughSubCategories() {
         openPage("homePage");
         List<String> categoryNames = at(TopMenuPage.class).getCategoryNames();

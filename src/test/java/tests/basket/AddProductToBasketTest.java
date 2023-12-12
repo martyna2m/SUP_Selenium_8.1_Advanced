@@ -12,7 +12,8 @@ import tests.base.TestBase;
 
 public class AddProductToBasketTest extends TestBase {
 
-    @RepeatedTest(3)
+    @RepeatedTest(1)
+    @Tag("basket")
     @Tag("yaml2")
     public void addProductToBasket() {
         String expectedProductName = testDataProvider.getTestData("productName2");

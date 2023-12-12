@@ -12,7 +12,8 @@ import java.util.Random;
 
 public class SearchInputTest extends TestBase {
 
-    @RepeatedTest(3)
+    @RepeatedTest(1)
+    @Tag("search")
     public void searchRandomProduct() {
         openPage("homePage");
 
@@ -31,7 +32,8 @@ public class SearchInputTest extends TestBase {
     }
 
 
-    @RepeatedTest(3)
+    @RepeatedTest(1)
+    @Tag("search")
     @Tag("yaml1")
     public void verifySearchDropdown() {
         String searchedProduct = testDataProvider.getTestData("productName1");

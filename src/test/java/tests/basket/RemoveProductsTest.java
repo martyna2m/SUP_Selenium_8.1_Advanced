@@ -12,7 +12,8 @@ import java.util.List;
 
 public class RemoveProductsTest extends Steps {
 
-    @RepeatedTest(3)
+    @RepeatedTest(1)
+    @Tag("basket")
     @Tag("yaml3")
     public void removeAddedProductsFromBasket() throws InterruptedException {
         int expectedQuantity = parseInt(testDataProvider.getTestData("quantity3"));

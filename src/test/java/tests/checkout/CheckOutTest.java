@@ -14,6 +14,7 @@ import steps.Steps;
 
 public class CheckOutTest extends Steps {
     @RepeatedTest(1)
+    @Tag("checkout")
     @Tag("yaml4")
     public void checkOutTest() {
 
