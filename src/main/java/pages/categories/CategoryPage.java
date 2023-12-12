@@ -40,23 +40,27 @@ public class CategoryPage extends BasePage {
         super(driver);
     }
 
-    public String getCategoryName() {
-        return getText(header);
+    public String getCategoryPageName() {
+        return getText(header).toUpperCase();
     }
-
 
     public String getTotalNumberOfProductsInfo() {
-        return getText(totalNumberOfProductsInfo);
+        String actualInfo = getText(totalNumberOfProductsInfo);
+        if (actualInfo.equals("There is 1 product.")) {
+            return "There are 1 products.";
+        }
+        return actualInfo;
     }
 
-    public CategoryPage deleteFilter(String filterName){
-      for(WebElement filter : activeFilters){
-          if (getText(filter).toLowerCase().contains(filterName.toLowerCase())){
-             click(filter.findElement(By.cssSelector("a>i")));
-          }
-          defaultWait.until(ExpectedConditions.invisibilityOf(spinner));
-      }
-      return this;
+    public CategoryPage deleteFilter(String filterName) {
+        for (WebElement filter : activeFilters) {
+            if (getText(filter).toLowerCase().contains(filterName.toLowerCase())) {
+                click(filter.findElement(By.cssSelector("a>i")));
+            }
+            defaultWait.until(ExpectedConditions.invisibilityOf(spinner));
+        }
+        return this;
     }
+
 
 }

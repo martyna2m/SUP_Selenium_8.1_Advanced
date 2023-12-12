@@ -20,6 +20,9 @@ import java.util.regex.Pattern;
 @Setter
 public class SideFilterMenuPage extends BasePage {
 
+    @FindBy(css = ".category-sub-menu>li")
+    private List<WebElement> subCategories;
+
     @FindBy(css = "#search_filters>.facet")
     private List<WebElement> filterSections;
 
@@ -35,6 +38,25 @@ public class SideFilterMenuPage extends BasePage {
     @FindBy(css = ".spinner")
     private WebElement spinner;
 
+
+public void goToSubCategoryPage(WebElement element){
+    click(element);
+}
+
+public String getSubCategoryName(WebElement element){
+  return getText(element).toUpperCase();
+}
+
+    public  List<String> getSubcategoryNames(List<WebElement> subCategories) {
+        List<String> subcategoryNameList = new ArrayList<>();
+
+        for (WebElement subCategory: subCategories) {
+            String subcategoryName = getSubCategoryName(subCategory);
+            subcategoryNameList.add(subcategoryName);
+        }
+
+        return subcategoryNameList;
+    }
 
     public SideFilterMenuPage(WebDriver driver) {
         super(driver);

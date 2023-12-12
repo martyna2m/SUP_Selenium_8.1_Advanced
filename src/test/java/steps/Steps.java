@@ -31,7 +31,7 @@ public class Steps extends TestBase {
 
     public void chooseCategoryAndProduct(String categoryName, String productName) {
         at(TopMenuPage.class)
-                .goToCategoryPage(categoryName);
+                .goToCategoryPageWithName(categoryName);
 
         at(CategoryPage.class)
                 .getProductMiniatureContainerPage()

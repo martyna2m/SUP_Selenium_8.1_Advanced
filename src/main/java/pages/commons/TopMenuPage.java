@@ -69,6 +69,7 @@ public class TopMenuPage extends BasePage {
     public List<WebElement> getSubCategories(String categoryName) {
         WebElement chosenCategory = chooseCategory(categoryName);
         hoverOverElement(chosenCategory);
+        assert chosenCategory != null;
         return chosenCategory.findElements(By.cssSelector(".dropdown-submenu"));
     }
 
@@ -85,8 +86,14 @@ public class TopMenuPage extends BasePage {
         return null;
     }
 
-    public void goToCategoryPage(String categoryName) {
+    public void goToCategoryPageWithName(String categoryName) {
         click(chooseCategory(categoryName));
+    }
+public String getCategoryName(WebElement element){
+       return getText(element);
+}
+    public void goToCategoryPage(WebElement element){
+        click(element);
     }
 
 
