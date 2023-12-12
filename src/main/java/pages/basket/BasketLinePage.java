@@ -44,7 +44,7 @@ public class BasketLinePage extends BasePage {
 
 
     public BasketLine toBasketLine() {
-        return new BasketLine(new Product(nameLabel.getText(), getPriceFromElement(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPrice(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
+        return new BasketLine(new Product(nameLabel.getText(), getPriceFromElement(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPriceByQuantity(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
 
     }
 

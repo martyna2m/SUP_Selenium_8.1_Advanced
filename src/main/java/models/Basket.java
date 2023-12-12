@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-
     private static Basket instance;
     private List<BasketLine> basketLines;
 
@@ -38,6 +37,10 @@ public class Basket {
 
     public void removeBasketLine(String name) {
         getExpectedBasketLines().remove(getBasketLineFromExpectedBasket(name));
+    }
+
+    public void clearBasket(){
+        getExpectedBasketLines().clear();
     }
 
 }

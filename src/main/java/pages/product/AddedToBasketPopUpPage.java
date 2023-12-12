@@ -3,12 +3,11 @@ package pages.product;
 import lombok.Getter;
 import models.BasketLine;
 import models.Product;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
+
 @Getter
 public class AddedToBasketPopUpPage extends BasePage {
     public AddedToBasketPopUpPage(WebDriver driver) {
@@ -50,10 +49,9 @@ public class AddedToBasketPopUpPage extends BasePage {
     private WebElement proceedToCheckOutBtn;
 
     public BasketLine toBasketLine() {
-        return new BasketLine(new Product(this.addedProductName.getText(), getPriceFromElement(this.addedProductPrice)), getIntNumberFromText(this.addedProductQuantity), getTotalPrice(getPriceFromElement(this.addedProductPrice), getIntNumberFromText(this.addedProductQuantity)));
+        return new BasketLine(new Product(this.addedProductName.getText(), getPriceFromElement(this.addedProductPrice)), getIntNumberFromText(this.addedProductQuantity), getTotalPriceByQuantity(getPriceFromElement(this.addedProductPrice), getIntNumberFromText(this.addedProductQuantity)));
 
     }
-
 
     public void clickProceedToCheckout() {
         click(proceedToCheckOutBtn);

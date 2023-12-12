@@ -15,17 +15,17 @@ public class MyAccountPage extends BasePage {
     @FindBy(css = "#identity-link")
     private WebElement infoLink;
 
- @FindBy(css = "#order-slips-link")
+    @FindBy(css = "#order-slips-link")
     private WebElement orderSlipsLink;
 
- @FindBy(css = "#psgdpr-link")
+    @FindBy(css = "#psgdpr-link")
     private WebElement gdprLink;
 
     public MyAccountPage(WebDriver driver) {
         super(driver);
     }
 
-    public void goToOrderHistory(){
+    public void goToOrderHistory() {
         click(orderHistoryLink);
 
     }

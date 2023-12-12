@@ -15,7 +15,7 @@ public class ShippingSectionPage extends BasePage {
 
 
     public ShippingSectionPage chooseShippingMethod() {
-        if (!myCarrierOption.isSelected()){
+        if (!myCarrierOption.isSelected()) {
             click(myCarrierOption);
         }
         return this;

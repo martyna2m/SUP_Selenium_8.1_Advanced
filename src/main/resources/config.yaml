@@ -19,19 +19,30 @@ users:
     password: password
     birthdate: 05/01/1970
 
+addresses:
+  address1:
+    street: ExampleStreet 19
+    city: Phoenix
+    postalCode: 85001
+    phoneNumber: 100-200-300
+    country: United States
+    state: Arizona
+    companyName: exampleCompany
+
+
+
 
 testData:
-  lowerPriceFilter: 13
-  higherPriceFilter: 15
-  quantity: 2
-  numberOfProducts: 2
-  country: United States
-  postalCode: 85001
-  state: Arizona
-  posterName: THE BEST IS YET POSTER
-  paymentStatus: Awaiting check payment
-
-
-
-
+  defaultWait: 10
+  productName1: HUMMINGBIRD
+  posterName2: THE BEST IS YET POSTER
+  quantity2: 3
+  quantity3: 2
+  numberOfProducts3: 2
+  categoryName4: Art
+  posterName4: THE BEST IS YET POSTER
+  lowerPriceFilter5: 13
+  higherPriceFilter5: 15
+  paymentStatus6: Awaiting check payment
+  numberOfRepetitions7: 10
 

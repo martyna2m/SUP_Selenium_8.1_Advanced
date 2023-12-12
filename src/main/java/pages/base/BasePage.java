@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 @Setter
 public class BasePage {
 
-
     public WebDriver driver;
     public Actions actions;
     public WebDriverWait defaultWait;
@@ -43,11 +42,10 @@ public class BasePage {
     private void init(WebDriver driver) {
         this.driver = driver;
         this.actions = new Actions(driver);
-        this.defaultWait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.basket = Basket.getInstance();
         this.testDataProvider = new TestDataProvider();
+        this.defaultWait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(testDataProvider.getTestData("defaultWait"))));
+        this.basket = Basket.getInstance();
 
-        // get 10 from yaml
     }
 
 
@@ -62,7 +60,6 @@ public class BasePage {
 
 
     public void sendKeys(WebElement element, String phrase) {
-        // add conditions
         waitToBeClickable(element);
         element.clear();
         sendKeysWithoutClear(element, phrase);
@@ -103,7 +100,8 @@ public class BasePage {
             return BigDecimal.ZERO;
         }
     }
-    public BigDecimal convertIntToBigDecimal(int intValue){
+
+    public BigDecimal convertIntToBigDecimal(int intValue) {
         return BigDecimal.valueOf(intValue).setScale(2);
 
     }
@@ -121,7 +119,7 @@ public class BasePage {
         return Integer.parseInt(getText(element));
     }
 
-    public BigDecimal getTotalPrice(BigDecimal price, int quantity) {
+    public BigDecimal getTotalPriceByQuantity(BigDecimal price, int quantity) {
         return price.multiply(BigDecimal.valueOf(quantity));
     }
 

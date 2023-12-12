@@ -1,38 +1,39 @@
 package tests.base;
 
 import configuration.Browser;
-import configuration.PropertiesFromYaml;
 import configuration.DriverFactory;
+import configuration.PropertiesFromYaml;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import models.Basket;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import pages.base.BasePage;
 import providers.TestDataProvider;
 import providers.UrlProvider;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class TestBase {
 
-    protected static WebDriver driver;
-    protected static Browser activeBrowser;
-    protected static DriverFactory driverFactory = new DriverFactory();
+    protected  WebDriver driver;
+    protected  Browser activeBrowser;
+    protected  DriverFactory driverFactory = new DriverFactory();
 
-    protected static TestDataProvider testDataProvider = new TestDataProvider();
+    protected  TestDataProvider testDataProvider = new TestDataProvider();
 
 
-    @BeforeAll
-    static void setUpDriver() {
+    @BeforeEach
+    void setUpDriver() {
         activeBrowser = driverFactory.getActiveBrowser(PropertiesFromYaml.config);
         driver = driverFactory.setDriver(activeBrowser);
 
     }
 
-    @AfterAll
-    static void tearDown() {
+    @AfterEach
+    void tearDown() {
         driver.quit();
+        Basket.getInstance().clearBasket();
     }
 
 
@@ -43,12 +44,12 @@ public class TestBase {
 
 
     public void openPage(String urlKey) {
-      UrlProvider urlProvider = new UrlProvider();
-       String selectedUrl = urlProvider.getUrl(urlKey);
+        UrlProvider urlProvider = new UrlProvider();
+        String selectedUrl = urlProvider.getUrl(urlKey);
         driver.get(selectedUrl);
     }
 
-    public BigDecimal convertIntToBigDecimal(int intValue){
+    public BigDecimal convertIntToBigDecimal(int intValue) {
         return BigDecimal.valueOf(intValue).setScale(2);
 
     }

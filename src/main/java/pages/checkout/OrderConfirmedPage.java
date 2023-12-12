@@ -30,15 +30,14 @@ public class OrderConfirmedPage extends BasePage {
         return getText(paymentAmount);
     }
 
-    public String getOrderDate(){
+    public String getOrderDate() {
         LocalDate orderDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         return orderDate.format(formatter);
     }
 
-    public String getOrderDetails(){
-        String orderInfo = "Reference number: " + getReferenceNumber() + ", totalPrice: " + getPaymentAmount() + ", orderDate: " + getOrderDate();
-        return orderInfo;
+    public String getOrderDetails() {
+        return "Reference number: " + getReferenceNumber() + ", totalPrice: " + getPaymentAmount() + ", orderDate: " + getOrderDate();
     }
 
 }

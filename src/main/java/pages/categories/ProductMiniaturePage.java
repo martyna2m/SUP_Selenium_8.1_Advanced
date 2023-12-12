@@ -29,7 +29,6 @@ public class ProductMiniaturePage extends BasePage {
     @FindBy(css = ".regular-price")
     private WebElement regularPrice;
 
-
     @FindBy(css = ".product-miniature>div>a")
     private WebElement icon;
 

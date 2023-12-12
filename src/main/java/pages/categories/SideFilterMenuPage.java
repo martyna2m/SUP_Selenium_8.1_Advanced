@@ -39,18 +39,18 @@ public class SideFilterMenuPage extends BasePage {
     private WebElement spinner;
 
 
-public void goToSubCategoryPage(WebElement element){
-    click(element);
-}
+    public void goToSubCategoryPage(WebElement element) {
+        click(element);
+    }
 
-public String getSubCategoryName(WebElement element){
-  return getText(element).toUpperCase();
-}
+    public String getSubCategoryName(WebElement element) {
+        return getText(element).toUpperCase();
+    }
 
-    public  List<String> getSubcategoryNames(List<WebElement> subCategories) {
+    public List<String> getSubcategoryNames(List<WebElement> subCategories) {
         List<String> subcategoryNameList = new ArrayList<>();
 
-        for (WebElement subCategory: subCategories) {
+        for (WebElement subCategory : subCategories) {
             String subcategoryName = getSubCategoryName(subCategory);
             subcategoryNameList.add(subcategoryName);
         }
@@ -72,7 +72,50 @@ public String getSubCategoryName(WebElement element){
         return getText(priceRangeInfo);
     }
 
-    public List<String> extractTwoPrices(String priceRange) {
+
+    public List<BigDecimal> getPricesFromRangeFilter() {
+        List<BigDecimal> prices = new ArrayList<>();
+        List<String> pricesStrings = extractTwoPrices(getPriceRangeText());
+        prices.add(deleteCurrency(pricesStrings.get(0)));
+        prices.add(deleteCurrency(pricesStrings.get(1)));
+        return prices;
+    }
+
+
+    public void setPriceFilters(int expectedLowerPrice, int expectedHigherPrice) {
+        BigDecimal expectedLowerPriceBD = convertIntToBigDecimal(expectedLowerPrice);
+        BigDecimal expectedHigherPriceBD = convertIntToBigDecimal(expectedHigherPrice);
+        setFilter(0, 0, expectedLowerPriceBD);
+        setFilter(1, 1, expectedHigherPriceBD);
+
+    }
+
+
+    private void getDirectionAndClick(WebElement element, BigDecimal currentPrice, BigDecimal expectedPrice) {
+        if (currentPrice.compareTo(expectedPrice) > 0) {
+            actions.clickAndHold(element);
+            element.sendKeys(Keys.ARROW_LEFT);
+        }
+        if (currentPrice.compareTo(expectedPrice) < 0) {
+            actions.clickAndHold(element);
+            element.sendKeys(Keys.ARROW_RIGHT);
+        }
+        defaultWait.until(ExpectedConditions.invisibilityOf(spinner));
+
+    }
+
+    private void setFilter(int handleIndex, int pricesIndex, BigDecimal expectedPrice) {
+        List<BigDecimal> prices = getPricesFromRangeFilter();
+        while (!Objects.equals(prices.get(pricesIndex), expectedPrice)) {
+            WebElement handle = sliderHandles.get(handleIndex);
+            getDirectionAndClick(handle, prices.get(pricesIndex), expectedPrice);
+            prices = getPricesFromRangeFilter();
+
+        }
+
+    }
+
+    private List<String> extractTwoPrices(String priceRange) {
         Pattern pattern = Pattern.compile("\\$\\d+\\.\\d{2}");
         Matcher matcher = pattern.matcher(priceRange);
 
@@ -83,36 +126,5 @@ public String getSubCategoryName(WebElement element){
         }
         return pricesList;
     }
-
-    public List<BigDecimal> getPricesFromRangeFilter() {
-        List<BigDecimal> prices = new ArrayList<>();
-        List<String> pricesStrings = extractTwoPrices(getPriceRangeText());
-        prices.add(deleteCurrency(pricesStrings.get(0)));
-        prices.add(deleteCurrency(pricesStrings.get(1)));
-        return prices;
-    }
-
-    public void setPriceFilter(int expectedLowerPrice, int expectedHigherPrice) {
-        List<BigDecimal> prices = getPricesFromRangeFilter();
-
-        while (!Objects.equals(prices.get(0), convertIntToBigDecimal(expectedLowerPrice))) {
-            WebElement leftHandle = sliderHandles.get(0);
-            actions.clickAndHold(leftHandle);
-            leftHandle.sendKeys(Keys.ARROW_RIGHT);
-            defaultWait.until(ExpectedConditions.invisibilityOf(spinner));
-            prices = getPricesFromRangeFilter();
-
-            while (!Objects.equals(prices.get(1), convertIntToBigDecimal(expectedHigherPrice))) {
-                WebElement rightHandle = sliderHandles.get(1);
-                actions.clickAndHold(rightHandle);
-                rightHandle.sendKeys(Keys.ARROW_LEFT);
-                defaultWait.until(ExpectedConditions.invisibilityOf(spinner));
-                prices = getPricesFromRangeFilter();
-            }
-
-        }
-    }
-
-
 }
 

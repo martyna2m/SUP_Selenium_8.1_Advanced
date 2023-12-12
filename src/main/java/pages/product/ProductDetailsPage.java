@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import models.BasketLine;
 import models.Product;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -77,12 +76,13 @@ public class ProductDetailsPage extends BasePage {
     public BasketLine addProductToBasket() {
         if (isProductInBasket(getText(this.nameLabel))) {
             BasketLine exisitingBasketLine = findProductInBasket(getText(this.nameLabel));
-            exisitingBasketLine.increaseQuantityAndTotalPrice(getIntNumberFromValue(quantityInput), getTotalPrice(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
+            exisitingBasketLine.increaseQuantityAndTotalPrice(getIntNumberFromValue(quantityInput), getTotalPriceByQuantity(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
             click(addToBasketBtn);
             waitForPopUp();
             return exisitingBasketLine;
+
         } else {
-            BasketLine expectedBasketLine = new BasketLine(new Product(getText(nameLabel), getPriceFromElement(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPrice(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
+            BasketLine expectedBasketLine = new BasketLine(new Product(getText(nameLabel), getPriceFromElement(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPriceByQuantity(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
             basket.addBasketLineToBasket(expectedBasketLine);
             click(addToBasketBtn);
             waitForPopUp();

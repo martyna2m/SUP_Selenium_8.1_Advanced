@@ -2,12 +2,10 @@ package pages.basket;
 
 import lombok.Getter;
 import lombok.Setter;
-import models.Basket;
 import models.BasketLine;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base.BasePage;
 
 import java.math.BigDecimal;
@@ -45,20 +43,19 @@ public class BasketPage extends BasePage {
         return basketLinesInBasket;
     }
 
-    public BigDecimal getTotalSumOfBasketLines(){
+    public BigDecimal getTotalSumOfBasketLines() {
         BigDecimal totalSum = convertIntToBigDecimal(0);
 
-        for(BasketLine basketLine : getBasketLinesInBasket()) {
+        for (BasketLine basketLine : getBasketLinesInBasket()) {
             totalSum = totalSum.add(basketLine.getTotalPrice());
         }
         return totalSum;
     }
 
 
-    public boolean checkIfTotalPriceIsCorrect(){
-       return Objects.equals(getTotalSumOfBasketLines(), basketSideGridPage.getProductsTotalSum());
+    public boolean IsTotalPriceCorrect() {
+        return Objects.equals(getTotalSumOfBasketLines(), basketSideGridPage.getProductsTotalSum());
     }
-
 
 
 }

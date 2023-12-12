@@ -13,7 +13,6 @@ import java.util.List;
 @Setter
 public class CheckOutPage extends BasePage {
 
-
     AddressesSectionPage addressesSectionPage = new AddressesSectionPage(driver);
 
     @FindBy(css = ".cart-grid-body>section")

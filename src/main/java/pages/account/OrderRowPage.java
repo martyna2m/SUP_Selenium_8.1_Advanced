@@ -44,8 +44,7 @@ public class OrderRowPage extends BasePage {
     }
 
     public String getHistoricalOrderDetails() {
-        String orderInfo = "Reference number: " + getOrderNumber() + ", totalPrice: " + getOrderTotalPrice() + ", orderDate: " + getOrderDate();
-        return orderInfo;
+        return "Reference number: " + getOrderNumber() + ", totalPrice: " + getOrderTotalPrice() + ", orderDate: " + getOrderDate();
     }
 
     public void goToDetails() {

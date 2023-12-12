@@ -4,7 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import models.Basket;
 import models.BasketLine;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import pages.basket.BasketPage;
 import steps.Steps;
 
@@ -13,11 +14,14 @@ import java.util.Random;
 
 @Slf4j
 public class GenericBasketTest extends Steps {
-    @Test
-    public void addRandomProductsToBasket() throws InterruptedException {
-        openPage("homePage");
+    @RepeatedTest(3)
+    @Tag("yaml7")
+    public void addRandomProductsToBasket() {
 
-        for (int i = 0; i < 10; i++) {
+        openPage("homePage");
+        int numberOfRepetitions = Integer.parseInt(testDataProvider.getTestData("numberOfRepetitions7"));
+
+        for (int i = 0; i < numberOfRepetitions; i++) {
             int randomExpectedQuantity = (new Random().nextInt(5)) + 1;
             addRandomProductToBasketAndReturnToHomePage(randomExpectedQuantity);
         }
@@ -31,7 +35,9 @@ public class GenericBasketTest extends Steps {
             Assertions.assertThat(expectedBasketLines.get(i)).usingRecursiveComparison().isEqualTo(actualBasketLines.get(i));
         }
 
-        Assertions.assertThat(at(BasketPage.class).checkIfTotalPriceIsCorrect()).isTrue();
+        Assertions.assertThat(at(BasketPage.class).IsTotalPriceCorrect()).isTrue();
+
+
     }
 }
 

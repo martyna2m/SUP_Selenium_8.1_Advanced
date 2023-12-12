@@ -1,7 +1,7 @@
 package tests.productAndCategories;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.RepeatedTest;
 import org.openqa.selenium.WebElement;
 import pages.categories.CategoryPage;
 import pages.categories.SideFilterMenuPage;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CategoriesTest extends TestBase {
 
-    @Test
+    @RepeatedTest(3)
     public void iterateThroughCategories() {
         openPage("homePage");
         List<String> categoryNames = at(TopMenuPage.class).getCategoryNames();
@@ -22,7 +22,7 @@ public class CategoriesTest extends TestBase {
         }
     }
 
-    @Test
+    @RepeatedTest(3)
     public void iterateThroughClothesSubCategories() {
         openPage("homePage");
         List<String> categoryNames = at(TopMenuPage.class).getCategoryNames();
@@ -45,17 +45,17 @@ public class CategoriesTest extends TestBase {
 
     private void assertCategoryPage(String categoryName) {
         Assertions.assertThat(at(CategoryPage.class)
-                .getCategoryPageName())
+                        .getCategoryPageName())
                 .isEqualTo(categoryName);
 
         Assertions.assertThat(at(SideFilterMenuPage.class)
-                .isSideFilterMenuDisplayed())
+                        .isSideFilterMenuDisplayed())
                 .isTrue();
 
         int actualNumberOfProducts =
                 at(CategoryPage.class)
-                .getProductMiniatureContainerPage()
-                .getProductMiniatures().size();
+                        .getProductMiniatureContainerPage()
+                        .getProductMiniatures().size();
 
         String actualNumberOfProductsInfo = at(CategoryPage.class).getTotalNumberOfProductsInfo();
         String expectedNumberOfProductsInfo = "There are " + actualNumberOfProducts + " products.";

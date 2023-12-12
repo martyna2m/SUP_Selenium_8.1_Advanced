@@ -1,10 +1,12 @@
 package models;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class Address {
-    private String address;
+    private String street;
     private String city;
     private String state;
     private String postalCode;
@@ -12,6 +14,18 @@ public class Address {
     private String phoneNumber;
     private String companyName;
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", country='" + country + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", companyName='" + companyName + '\'' +
+                '}';
+    }
 
     private Address() {
     }
@@ -21,17 +35,17 @@ public class Address {
     }
 
     public static final class Builder {
-        private String address;
+        private String street;
         private String city;
-        private String state;
-        private String postalCode;
-        private String country;
+        private String state = "Arizona";
+        private String postalCode = "85001";
+        private String country = "United States";
         private String phoneNumber;
         private String companyName;
 
 
-        public Address.Builder address(String address) {
-            this.address = address;
+        public Address.Builder street(String street) {
+            this.street = street;
             return this;
         }
 
@@ -67,7 +81,7 @@ public class Address {
 
 
         public  Address build() {
-            if (address.isEmpty()) {
+            if (street.isEmpty()) {
                 throw new IllegalStateException("Address cannot be empty");
             }
             if (city.isEmpty()) {
@@ -81,7 +95,7 @@ public class Address {
             }
 
             Address address= new Address();
-            address.address = this.address;
+            address.street = this.street;
             address.city = this.city;
             address.state = this.state;
             address.postalCode = this.postalCode;

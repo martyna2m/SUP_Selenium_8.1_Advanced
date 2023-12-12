@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Steps extends TestBase {
 
-    public void addRandomProductToBasketAndReturnToHomePage(int quantity) throws InterruptedException {
+    public void addRandomProductToBasketAndReturnToHomePage(int quantity)  {
         int randomIndex = new Random().nextInt(at(HomePage.class).getProductMiniatureContainerPage().getProductMiniatures().size());
 
         at(HomePage.class)

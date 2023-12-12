@@ -29,17 +29,14 @@ public class TopGridPage extends BasePage {
     private WebElement numberOfProductsInBasketIcon;
 
 
-    public ContactUsPage goToContactUsPage(){
+    public void goToContactUsPage(){
         click(contactUsBtn);
-        return new ContactUsPage(driver);
     }
-     public LogInPage goToSignInPage(){
+     public void goToSignInPage(){
         click(signInBtn);
-        return new LogInPage(driver);
     }
-     public BasketPage goToBasketPage(){
+     public void goToBasketPage(){
         click(basketBtn);
-        return new BasketPage(driver);
     }
     public int getNumberOfItemsInBasket(){
        return Integer.parseInt(getText(numberOfProductsInBasketIcon).replaceAll("\\(([^)]*)\\)", "$1"));

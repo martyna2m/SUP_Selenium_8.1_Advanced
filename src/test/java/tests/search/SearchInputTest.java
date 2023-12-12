@@ -1,7 +1,8 @@
 package tests.search;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import pages.home.HomePage;
 import pages.home.SearchResultsPage;
 import tests.base.TestBase;
@@ -11,7 +12,7 @@ import java.util.Random;
 
 public class SearchInputTest extends TestBase {
 
-    @Test
+    @RepeatedTest(3)
     public void searchRandomProduct() {
         openPage("homePage");
 
@@ -30,9 +31,10 @@ public class SearchInputTest extends TestBase {
     }
 
 
-    @Test
+    @RepeatedTest(3)
+    @Tag("yaml1")
     public void verifySearchDropdown() {
-        String searchedProduct = "HUMMINGBIRD";
+        String searchedProduct = testDataProvider.getTestData("productName1");
         openPage("homePage");
 
         List<String> suggestedProductNames = at(HomePage.class)

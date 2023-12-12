@@ -1,7 +1,8 @@
 package tests.productAndCategories;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import pages.categories.CategoryPage;
 import pages.categories.ProductMiniaturePage;
 import tests.base.TestBase;
@@ -9,10 +10,11 @@ import tests.base.TestBase;
 import java.util.List;
 
 public class FiltersTest extends TestBase {
-    @Test
+    @RepeatedTest(3)
+    @Tag("yaml5")
     public void setFilters() {
-        int lowerPriceFilter = Integer.parseInt(testDataProvider.getTestData("lowerPriceFilter"));
-        int higherFilterPrice = Integer.parseInt(testDataProvider.getTestData("higherPriceFilter"));
+        int lowerPriceFilter = Integer.parseInt(testDataProvider.getTestData("lowerPriceFilter5"));
+        int higherFilterPrice = Integer.parseInt(testDataProvider.getTestData("higherPriceFilter5"));
         openPage("accessoriesPage");
 
         int initialNumberOfProducts =
@@ -22,7 +24,7 @@ public class FiltersTest extends TestBase {
 
         at(CategoryPage.class)
                 .getSideFilterMenuPage()
-                .setPriceFilter(13, 15);
+                .setPriceFilters(13, 15);
 
         List<ProductMiniaturePage> filteredProductMiniatures = at(CategoryPage.class).getProductMiniatureContainerPage().getProductMiniatures();
         for (ProductMiniaturePage productMiniature : filteredProductMiniatures) {
@@ -33,6 +35,7 @@ public class FiltersTest extends TestBase {
 
         at(CategoryPage.class).deleteFilter("price");
         Assertions.assertThat(at(CategoryPage.class).getProductMiniatureContainerPage().getProductMiniatures().size()).isEqualTo(initialNumberOfProducts);
+
     }
 
 

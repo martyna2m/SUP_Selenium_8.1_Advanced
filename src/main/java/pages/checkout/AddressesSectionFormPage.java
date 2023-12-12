@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.base.BasePage;
-import providers.AddressFactory;
 import providers.DataFaker;
 
 @Getter
@@ -57,24 +56,20 @@ public class AddressesSectionFormPage extends BasePage {
     }
 
 
-
-    public Address fillTheFormWithFakeAddress() {
-        AddressFactory addressFactory = new AddressFactory();
+    public void fillTheAddressForm(Address address) {
         DataFaker dataFaker = new DataFaker();
-        Address fakeAddress = addressFactory.getRandomAddress();
-
         fillName(dataFaker.getFakeFirstName(), dataFaker.getFakeLastName())
-                .fillAddress(fakeAddress.getAddress())
-                .fillCompanyName(fakeAddress.getCompanyName())
-                .fillCity(fakeAddress.getCity())
-                .fillPostalCode(fakeAddress.getPostalCode())
-                .fillPhoneNumber(fakeAddress.getPhoneNumber())
+                .fillAddress(address.getStreet())
+                .fillCompanyName(address.getCompanyName())
+                .fillCity(address.getCity())
+                .fillPostalCode(address.getPostalCode())
+                .fillPhoneNumber(address.getPhoneNumber())
                 .chooseCountry(testDataProvider.getTestData("country"))
                 .chooseState(testDataProvider.getTestData("state"));
         clickContinue();
-        return fakeAddress;
 
     }
+
 
     public void clickContinue() {
         click(continueBtn);

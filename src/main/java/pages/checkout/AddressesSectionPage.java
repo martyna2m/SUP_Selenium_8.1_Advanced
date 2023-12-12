@@ -1,7 +1,6 @@
 package pages.checkout;
 
 import lombok.Getter;
-import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +24,6 @@ public class AddressesSectionPage extends BasePage {
     private List<WebElement> shippingAddresses;
 
 
-
     public AddressesSectionPage(WebDriver driver) {
         super(driver);
     }
@@ -45,9 +43,9 @@ public class AddressesSectionPage extends BasePage {
         return this;
     }
 
-    public void deleteRedundantAddresses(){
+    public void deleteRedundantAddresses() {
         if (shippingAddresses.size() > 2) {
-            shippingAddresses.get(shippingAddresses.size()-1).findElement(By.cssSelector(".delete-address")).click();
+            shippingAddresses.get(shippingAddresses.size() - 1).findElement(By.cssSelector(".delete-address")).click();
         }
     }
 
