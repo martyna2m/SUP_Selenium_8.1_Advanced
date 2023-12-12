@@ -64,8 +64,8 @@ public class AddressesSectionFormPage extends BasePage {
                 .fillCity(address.getCity())
                 .fillPostalCode(address.getPostalCode())
                 .fillPhoneNumber(address.getPhoneNumber())
-                .chooseCountry(testDataProvider.getTestData("country"))
-                .chooseState(testDataProvider.getTestData("state"));
+                .chooseCountry(address.getCountry())
+                .chooseState(address.getState());
         clickContinue();
 
     }

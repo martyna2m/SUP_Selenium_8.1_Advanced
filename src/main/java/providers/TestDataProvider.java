@@ -1,7 +1,6 @@
 package providers;
 
 import configuration.PropertiesFromYaml;
-import lombok.Getter;
 
 import java.util.Map;
 
@@ -19,8 +18,13 @@ public class TestDataProvider {
     }
 
 
-    public String getTestData(String key){
-        return testData.get(key).toString();
+    public String getTestData(String key) throws NullPointerException {
+        try {
+            return testData.get(key).toString();
+        } catch (Exception e) {
+            System.out.println("Property for keyValue: " + key + " is null. Check yaml file.");
+        }
+        return null;
     }
 
 }

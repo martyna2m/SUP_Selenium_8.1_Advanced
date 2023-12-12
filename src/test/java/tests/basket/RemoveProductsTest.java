@@ -15,8 +15,8 @@ public class RemoveProductsTest extends Steps {
     @RepeatedTest(3)
     @Tag("yaml3")
     public void removeAddedProductsFromBasket() throws InterruptedException {
-        int expectedQuantity = Integer.parseInt(testDataProvider.getTestData("quantity3"));
-        int expectedNumberOfProducts = Integer.parseInt(testDataProvider.getTestData("numberOfProducts3"));
+        int expectedQuantity = parseInt(testDataProvider.getTestData("quantity3"));
+        int expectedNumberOfProducts = parseInt(testDataProvider.getTestData("numberOfProducts3"));
 
         openPage("homePage");
         for (int i = 0; i < expectedNumberOfProducts; i++) {

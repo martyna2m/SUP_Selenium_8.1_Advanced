@@ -15,11 +15,11 @@ import java.util.Random;
 @Slf4j
 public class GenericBasketTest extends Steps {
     @RepeatedTest(3)
-    @Tag("yaml7")
+    @Tag("yaml6")
     public void addRandomProductsToBasket() {
 
         openPage("homePage");
-        int numberOfRepetitions = Integer.parseInt(testDataProvider.getTestData("numberOfRepetitions7"));
+        int numberOfRepetitions = parseInt(testDataProvider.getTestData("numberOfRepetitions6"));
 
         for (int i = 0; i < numberOfRepetitions; i++) {
             int randomExpectedQuantity = (new Random().nextInt(5)) + 1;

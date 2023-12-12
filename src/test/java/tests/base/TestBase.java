@@ -16,11 +16,11 @@ import java.math.BigDecimal;
 
 public class TestBase {
 
-    protected  WebDriver driver;
-    protected  Browser activeBrowser;
-    protected  DriverFactory driverFactory = new DriverFactory();
+    protected WebDriver driver;
+    protected Browser activeBrowser;
+    protected DriverFactory driverFactory = new DriverFactory();
 
-    protected  TestDataProvider testDataProvider = new TestDataProvider();
+    protected TestDataProvider testDataProvider = new TestDataProvider();
 
 
     @BeforeEach
@@ -51,6 +51,11 @@ public class TestBase {
 
     public BigDecimal convertIntToBigDecimal(int intValue) {
         return BigDecimal.valueOf(intValue).setScale(2);
+
+    }
+
+    public int parseInt(String text) {
+        return Integer.parseInt(text);
 
     }
 

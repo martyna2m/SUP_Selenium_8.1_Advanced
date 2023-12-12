@@ -23,7 +23,7 @@ public class CategoriesTest extends TestBase {
     }
 
     @RepeatedTest(3)
-    public void iterateThroughClothesSubCategories() {
+    public void iterateThroughSubCategories() {
         openPage("homePage");
         List<String> categoryNames = at(TopMenuPage.class).getCategoryNames();
 

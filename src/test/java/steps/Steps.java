@@ -1,6 +1,9 @@
 package steps;
 
+import pages.basket.BasketSideGridPage;
 import pages.categories.CategoryPage;
+import pages.checkout.PaymentSectionPage;
+import pages.checkout.ShippingSectionPage;
 import pages.commons.TopMenuPage;
 import pages.home.HomePage;
 import pages.product.AddedToBasketPopUpPage;
@@ -36,5 +39,27 @@ public class Steps extends TestBase {
         at(CategoryPage.class)
                 .getProductMiniatureContainerPage()
                 .selectProductByName(productName);
+    }
+
+    public void addProductAndProceedToCheckOut(){
+        at(ProductDetailsPage.class)
+                .addProductToBasket();
+
+        at(AddedToBasketPopUpPage.class)
+                .clickProceedToCheckout();
+
+        at(BasketSideGridPage.class)
+                .proceedToCheckout();
+    }
+
+    public void fillPaymentAndShippingSection(){
+        at(ShippingSectionPage.class)
+                .chooseShippingMethod()
+                .clickContinue();
+
+        at(PaymentSectionPage.class)
+                .selectPaymentOption()
+                .agreeToTerms()
+                .placeOrder();
     }
 }

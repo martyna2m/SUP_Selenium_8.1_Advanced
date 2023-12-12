@@ -13,20 +13,23 @@ public class FiltersTest extends TestBase {
     @RepeatedTest(3)
     @Tag("yaml5")
     public void setFilters() {
-        int lowerPriceFilter = Integer.parseInt(testDataProvider.getTestData("lowerPriceFilter5"));
-        int higherFilterPrice = Integer.parseInt(testDataProvider.getTestData("higherPriceFilter5"));
+        int lowerPriceFilter = parseInt(testDataProvider.getTestData("lowerPriceFilter5"));
+        int higherFilterPrice = parseInt(testDataProvider.getTestData("higherPriceFilter5"));
         openPage("accessoriesPage");
 
-        int initialNumberOfProducts =
-                at(CategoryPage.class)
-                        .getProductMiniatureContainerPage()
-                        .getProductMiniatures().size();
+        int initialNumberOfProducts = at(CategoryPage.class)
+                .getProductMiniatureContainerPage()
+                .getProductMiniatures().size();
 
         at(CategoryPage.class)
                 .getSideFilterMenuPage()
                 .setPriceFilters(13, 15);
 
-        List<ProductMiniaturePage> filteredProductMiniatures = at(CategoryPage.class).getProductMiniatureContainerPage().getProductMiniatures();
+        List<ProductMiniaturePage> filteredProductMiniatures = at(CategoryPage.class)
+                .getProductMiniatureContainerPage()
+                .getProductMiniatures();
+
+
         for (ProductMiniaturePage productMiniature : filteredProductMiniatures) {
             Assertions.assertThat(productMiniature.getCurrentProductPrice())
                     .isGreaterThan(convertIntToBigDecimal(lowerPriceFilter))
@@ -34,7 +37,11 @@ public class FiltersTest extends TestBase {
         }
 
         at(CategoryPage.class).deleteFilter("price");
-        Assertions.assertThat(at(CategoryPage.class).getProductMiniatureContainerPage().getProductMiniatures().size()).isEqualTo(initialNumberOfProducts);
+        Assertions.assertThat(at(CategoryPage.class)
+                        .getProductMiniatureContainerPage()
+                        .getProductMiniatures()
+                        .size())
+                .isEqualTo(initialNumberOfProducts);
 
     }
 

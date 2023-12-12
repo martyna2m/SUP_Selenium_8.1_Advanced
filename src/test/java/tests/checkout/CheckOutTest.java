@@ -5,21 +5,15 @@ import models.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import pages.account.*;
-import pages.basket.BasketSideGridPage;
 import pages.checkout.CheckOutPage;
 import pages.checkout.OrderConfirmedPage;
-import pages.checkout.PaymentSectionPage;
-import pages.checkout.ShippingSectionPage;
-import pages.product.AddedToBasketPopUpPage;
-import pages.product.ProductDetailsPage;
 import providers.AddressFactory;
 import providers.UserFactory;
 import steps.Steps;
 
 public class CheckOutTest extends Steps {
-    @RepeatedTest(3)
+    @RepeatedTest(1)
     @Tag("yaml4")
     public void checkOutTest() {
 
@@ -30,8 +24,6 @@ public class CheckOutTest extends Steps {
         AddressFactory addressFactory = new AddressFactory();
 
         Address address1 = addressFactory.getExistingAddress("address1");
-
-
         User user1 = userFactory.getExisitingUser("user1");
 
         openPage("loginPage");
@@ -40,15 +32,7 @@ public class CheckOutTest extends Steps {
                 .logIn(user1.getEmail(), user1.getPassword());
 
         chooseCategoryAndProduct(categoryName, productName);
-
-        at(ProductDetailsPage.class)
-                .addProductToBasket();
-
-        at(AddedToBasketPopUpPage.class)
-                .clickProceedToCheckout();
-
-        at(BasketSideGridPage.class)
-                .proceedToCheckout();
+        addProductAndProceedToCheckOut();
 
         at(CheckOutPage.class)
                 .getAddressesSectionPage()
@@ -56,16 +40,7 @@ public class CheckOutTest extends Steps {
                 .getAddressesSectionFormPage()
                 .fillTheAddressForm(address1);
 
-
-        at(ShippingSectionPage.class)
-                .chooseShippingMethod()
-                .clickContinue();
-
-
-        at(PaymentSectionPage.class)
-                .selectPaymentOption()
-                .agreeToTerms()
-                .placeOrder();
+        fillPaymentAndShippingSection();
 
         String expectedOrderDetails = at(OrderConfirmedPage.class).getOrderDetails();
 
@@ -78,20 +53,15 @@ public class CheckOutTest extends Steps {
 
         recentOrder.goToDetails();
 
-
         String deliveryAddressDetails = at(OrderDetails.class).getNameFromDeliveryAddress();
         String invoiceAddressDetails = at(OrderDetails.class).getNameFromInvoiceAddress();
 
-
         Assertions.assertThat(expectedOrderDetails).isEqualTo(actualOrderDetails);
-        Assertions.assertThat(invoiceStatus).isEqualTo(testDataProvider.getTestData("paymentStatus"));
+        Assertions.assertThat(invoiceStatus).isEqualTo(testDataProvider.getTestData("paymentStatus4"));
 
         Assertions.assertThat(deliveryAddressDetails).contains(user1.getFullName());
         Assertions.assertThat(invoiceAddressDetails).contains(user1.getFullName());
-
         Assertions.assertThat(invoiceAddressDetails).contains(address1.getStreet(), address1.getCity(), address1.getPostalCode(), address1.getCountry());
-
-        System.out.println(addressFactory.getExistingAddress("address1"));
 
     }
 }

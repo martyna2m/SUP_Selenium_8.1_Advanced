@@ -43,7 +43,7 @@ public class BasePage {
         this.driver = driver;
         this.actions = new Actions(driver);
         this.testDataProvider = new TestDataProvider();
-        this.defaultWait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(testDataProvider.getTestData("defaultWait"))));
+        this.defaultWait = new WebDriverWait(driver, Duration.ofSeconds(parseInt(testDataProvider.getTestData("defaultWait"))));
         this.basket = Basket.getInstance();
 
     }
@@ -105,6 +105,10 @@ public class BasePage {
         return BigDecimal.valueOf(intValue).setScale(2);
 
     }
+    public int parseInt(String text) {
+        return Integer.parseInt(text);
+
+    }
 
     public BigDecimal getPriceFromElement(WebElement element) {
         waitToBeVisible(element);
@@ -112,11 +116,11 @@ public class BasePage {
     }
 
     public int getIntNumberFromValue(WebElement element) {
-        return Integer.parseInt(element.getAttribute("value"));
+        return parseInt(element.getAttribute("value"));
     }
 
     public int getIntNumberFromText(WebElement element) {
-        return Integer.parseInt(getText(element));
+        return parseInt(getText(element));
     }
 
     public BigDecimal getTotalPriceByQuantity(BigDecimal price, int quantity) {

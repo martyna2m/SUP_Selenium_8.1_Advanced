@@ -30,19 +30,17 @@ addresses:
     companyName: exampleCompany
 
 
-
-
 testData:
   defaultWait: 10
   productName1: HUMMINGBIRD
-  posterName2: THE BEST IS YET POSTER
+  productName2: THE BEST IS YET POSTER
   quantity2: 3
   quantity3: 2
   numberOfProducts3: 2
   categoryName4: Art
   posterName4: THE BEST IS YET POSTER
+  paymentStatus4: Awaiting check payment
   lowerPriceFilter5: 13
   higherPriceFilter5: 15
-  paymentStatus6: Awaiting check payment
-  numberOfRepetitions7: 10
+  numberOfRepetitions6: 10
 

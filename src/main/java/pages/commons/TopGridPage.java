@@ -5,10 +5,8 @@ import lombok.Setter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.account.LogInPage;
 import pages.base.BasePage;
-import pages.contact.ContactUsPage;
-import pages.basket.BasketPage;
+
 @Getter
 @Setter
 public class TopGridPage extends BasePage {
@@ -25,21 +23,24 @@ public class TopGridPage extends BasePage {
     @FindBy(css = "#_desktop_cart")
     private WebElement basketBtn;
 
-  @FindBy(css = ".cart-products-count")
+    @FindBy(css = ".cart-products-count")
     private WebElement numberOfProductsInBasketIcon;
 
 
-    public void goToContactUsPage(){
+    public void goToContactUsPage() {
         click(contactUsBtn);
     }
-     public void goToSignInPage(){
+
+    public void goToSignInPage() {
         click(signInBtn);
     }
-     public void goToBasketPage(){
+
+    public void goToBasketPage() {
         click(basketBtn);
     }
-    public int getNumberOfItemsInBasket(){
-       return Integer.parseInt(getText(numberOfProductsInBasketIcon).replaceAll("\\(([^)]*)\\)", "$1"));
+
+    public int getNumberOfItemsInBasket() {
+        return parseInt(getText(numberOfProductsInBasketIcon).replaceAll("\\(([^)]*)\\)", "$1"));
     }
 
 }
