@@ -39,7 +39,7 @@ testData:
   numberOfProducts: 2
   categoryName: Art
   paymentStatus: Awaiting check payment
-  lowerPriceFilter: 13
-  higherPriceFilter: 15
+  lowerPriceFilter: 13.00
+  higherPriceFilter: 15.00
   numberOfRepetitions: 10
 

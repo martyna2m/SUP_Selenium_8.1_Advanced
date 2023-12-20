@@ -58,5 +58,9 @@ public class TestBase {
 
     }
 
+    public BigDecimal parseBigDecimal(String text){
+        return new BigDecimal(text).setScale(2);
+    }
+
 
 }

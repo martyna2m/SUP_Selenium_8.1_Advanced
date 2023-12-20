@@ -7,15 +7,15 @@ import pages.categories.CategoryPage;
 import pages.categories.ProductMiniaturePage;
 import tests.base.TestBase;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class FiltersTest extends TestBase {
     @RepeatedTest(1)
     @Tag("productAndCategories")
-    @Tag("yaml5")
     public void setFilters() {
-        int lowerPriceFilter = parseInt(testDataProvider.getTestData("lowerPriceFilter"));
-        int higherFilterPrice = parseInt(testDataProvider.getTestData("higherPriceFilter"));
+        BigDecimal lowerPriceFilter = parseBigDecimal(testDataProvider.getTestData("lowerPriceFilter"));
+        BigDecimal higherFilterPrice = parseBigDecimal(testDataProvider.getTestData("higherPriceFilter"));
         openPage("accessoriesPage");
 
         int initialNumberOfProducts = at(CategoryPage.class)
@@ -24,7 +24,7 @@ public class FiltersTest extends TestBase {
 
         at(CategoryPage.class)
                 .getSideFilterMenuPage()
-                .setPriceFilters(13, 15);
+                .setPriceFilters(lowerPriceFilter, higherFilterPrice);
 
         List<ProductMiniaturePage> filteredProductMiniatures = at(CategoryPage.class)
                 .getProductMiniatureContainerPage()
@@ -33,8 +33,8 @@ public class FiltersTest extends TestBase {
 
         for (ProductMiniaturePage productMiniature : filteredProductMiniatures) {
             Assertions.assertThat(productMiniature.getCurrentProductPrice())
-                    .isGreaterThan(convertIntToBigDecimal(lowerPriceFilter))
-                    .isLessThan(convertIntToBigDecimal(higherFilterPrice));
+                    .isGreaterThan(lowerPriceFilter)
+                    .isLessThan(higherFilterPrice);
         }
 
         at(CategoryPage.class).deleteFilter("price");

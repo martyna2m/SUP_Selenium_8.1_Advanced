@@ -2,6 +2,7 @@ package pages.categories;
 
 import helpers.PriceHelper;
 import lombok.Getter;
+import models.FilterRange;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,10 +12,9 @@ import pages.base.BasePage;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map;
 
 
 public class SideFilterMenuPage extends BasePage {
@@ -36,6 +36,9 @@ public class SideFilterMenuPage extends BasePage {
 
     @FindBy(css = ".spinner")
     private WebElement spinner;
+
+    private Map<String, WebElement> handlesMap;
+
 
 
     public void goToSubCategoryPage(WebElement element) {
@@ -72,20 +75,15 @@ public class SideFilterMenuPage extends BasePage {
     }
 
 
-    public List<BigDecimal> getPricesFromRangeFilter() {
-        List<BigDecimal> prices = new ArrayList<>();
-        List<String> pricesStrings = extractTwoPrices(getPriceRangeText());
-        prices.add(PriceHelper.deleteCurrency(pricesStrings.get(0)));
-        prices.add(PriceHelper.deleteCurrency(pricesStrings.get(1)));
-        return prices;
+    public FilterRange getPricesFromRangeFilter() {
+        return extractTwoPrices(getPriceRangeText());
+
     }
 
 
-    public void setPriceFilters(int expectedLowerPrice, int expectedHigherPrice) {
-        BigDecimal expectedLowerPriceBD = PriceHelper.convertIntToBigDecimal(expectedLowerPrice);
-        BigDecimal expectedHigherPriceBD = PriceHelper.convertIntToBigDecimal(expectedHigherPrice);
-        setFilter(0, 0, expectedLowerPriceBD);
-        setFilter(1, 1, expectedHigherPriceBD);
+    public void setPriceFilters(BigDecimal expectedLowerPrice, BigDecimal expectedHigherPrice) {
+        setFilter("left", "from", expectedLowerPrice);
+        setFilter("right", "to", expectedHigherPrice);
 
     }
 
@@ -102,27 +100,31 @@ public class SideFilterMenuPage extends BasePage {
 
     }
 
-    private void setFilter(int handleIndex, int pricesIndex, BigDecimal expectedPrice) {
-        List<BigDecimal> prices = getPricesFromRangeFilter();
-        while (!Objects.equals(prices.get(pricesIndex), expectedPrice)) {
-            WebElement handle = sliderHandles.get(handleIndex);
-            getDirectionAndClick(handle, prices.get(pricesIndex), expectedPrice);
-            prices = getPricesFromRangeFilter();
+    private void setFilter(String leftOrRight, String fromOrTo, BigDecimal expectedPrice) {
+        FilterRange currentPrices = getPricesFromRangeFilter();
+
+        while (!(currentPrices.getValue(fromOrTo).equals(expectedPrice))) {
+            getDirectionAndClick(getHandle(leftOrRight), currentPrices.getValue(fromOrTo), expectedPrice);
+            currentPrices = getPricesFromRangeFilter();
 
         }
 
     }
 
-    private List<String> extractTwoPrices(String priceRange) {
-        Pattern pattern = Pattern.compile("\\$\\d+\\.\\d{2}");
-        Matcher matcher = pattern.matcher(priceRange);
-
-        List<String> pricesList = new ArrayList<>();
-
-        while (matcher.find()) {
-            pricesList.add(matcher.group());
-        }
-        return pricesList;
+    private FilterRange extractTwoPrices(String priceRange) {
+        String[] separatedPrices = priceRange.split(" - ");
+        String bottomPrice = separatedPrices[0];
+        String topPrice = separatedPrices[1];
+        return new FilterRange(PriceHelper.deleteCurrency(bottomPrice), PriceHelper.deleteCurrency(topPrice));
     }
+
+    private WebElement getHandle(String name) {
+        handlesMap = new HashMap<>();
+        handlesMap.put("left", sliderHandles.get(0));
+        handlesMap.put("right", sliderHandles.get(1));
+        return handlesMap.getOrDefault(name.toLowerCase(), null);
+
+    }
+
 }
 
