@@ -1,12 +1,14 @@
 package models;
 
+import helpers.PriceHelper;
 import lombok.Getter;
 import lombok.Setter;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.basket.BasketLinePage;
 
 import java.math.BigDecimal;
 
 @Getter
-@Setter
 public class BasketLine {
     private Product product;
     private int quantity;
@@ -32,7 +34,6 @@ public class BasketLine {
         this.quantity += newQuantity;
         this.totalPrice = this.totalPrice.add(newTotalPrice);
     }
-
 
 
 }

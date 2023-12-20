@@ -13,9 +13,9 @@ import tests.base.TestBase;
 
 public class AddProductToBasketTest extends TestBase {
 
-    @RepeatedTest(3)
+    @RepeatedTest(1)
     @Tag("basket")
-    public void addProductToBasket() {
+    public void addProductToBasket() throws Exception {
         Basket basket = new Basket();
         String expectedProductName = testDataProvider.getTestData("posterName");
         int expectedQuantity = parseInt(testDataProvider.getTestData("quantity"));

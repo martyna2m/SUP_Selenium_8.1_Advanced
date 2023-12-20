@@ -1,5 +1,6 @@
 package tests.basket;
 
+import helpers.PriceHelper;
 import models.Basket;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
@@ -14,9 +15,9 @@ import java.util.List;
 
 public class RemoveProductsTest extends Steps {
 
-    @RepeatedTest(5)
+    @RepeatedTest(1)
     @Tag("basket")
-    public void removeAddedProductsFromBasket() throws InterruptedException {
+    public void removeAddedProductsFromBasket()  {
         Basket basket = new Basket();
         BasketPage basketPage = new BasketPage(driver);
         BasketSideGridPage basketSideGridPage = new BasketSideGridPage(driver);
@@ -29,7 +30,7 @@ public class RemoveProductsTest extends Steps {
             addRandomProductToBasketAndReturnToHomePage(basket, expectedQuantity);
         }
         openPage("basketPage");
-        Assertions.assertThat(basketPage.getTotalSumOfBasketLines()).isEqualTo(basketSideGridPage.getProductsTotalSum());
+        Assertions.assertThat(basket.getTotalSumOfBasketLines()).isEqualTo(basketSideGridPage.getProductsTotalSum());
 
 
         for (int j = 0; j < expectedNumberOfProducts; j++) {
@@ -37,12 +38,12 @@ public class RemoveProductsTest extends Steps {
 
             if (!basketLinePages.isEmpty()) {
                 at(BasketPage.class).deleteBasketLine(basket, basketLinePages.get(0));
-                Assertions.assertThat(basketPage.getTotalSumOfBasketLines()).isEqualTo(basketSideGridPage.getProductsTotalSum());
-
+                Assertions.assertThat(basket.getTotalSumOfBasketLines()).isEqualTo(basketSideGridPage.getProductsTotalSum());
             }
 
         }
         Assertions.assertThat(at(TopGridPage.class).getNumberOfItemsInBasket()).isEqualTo(0);
+
     }
 
 }

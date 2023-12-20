@@ -16,7 +16,7 @@ import steps.Steps;
 public class CheckOutTest extends Steps {
     @RepeatedTest(1)
     @Tag("checkout")
-    public void checkOutTest() {
+    public void checkOutTest() throws Exception {
 
         Basket basket = new Basket();
 

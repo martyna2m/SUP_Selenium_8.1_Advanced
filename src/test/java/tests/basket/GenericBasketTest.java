@@ -1,5 +1,6 @@
 package tests.basket;
 
+import helpers.RandomHelper;
 import lombok.extern.slf4j.Slf4j;
 import models.Basket;
 import models.BasketLine;
@@ -24,7 +25,7 @@ public class GenericBasketTest extends Steps {
         int numberOfRepetitions = parseInt(testDataProvider.getTestData("numberOfRepetitions"));
 
         for (int i = 0; i < numberOfRepetitions; i++) {
-            int randomExpectedQuantity = (new Random().nextInt(5)) + 1;
+            int randomExpectedQuantity = RandomHelper.getRandomNumber(5) + 1;
             addRandomProductToBasketAndReturnToHomePage(basket, randomExpectedQuantity);
         }
 
@@ -34,7 +35,7 @@ public class GenericBasketTest extends Steps {
         List<BasketLine> expectedBasketLines = basket.getExpectedBasketLines();
 
         Assertions.assertThat(expectedBasketLines).usingRecursiveComparison().isEqualTo(actualBasketLines);
-        Assertions.assertThat(at(BasketPage.class).getTotalSumOfBasketLines()).isEqualTo(at(BasketSideGridPage.class).getProductsTotalSum());
+        Assertions.assertThat(basket.getTotalSumOfBasketLines()).isEqualTo(at(BasketSideGridPage.class).getProductsTotalSum());
 
 
     }

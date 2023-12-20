@@ -1,5 +1,6 @@
 package steps;
 
+import helpers.RandomHelper;
 import models.Basket;
 import pages.basket.BasketSideGridPage;
 import pages.categories.CategoryPage;
@@ -16,7 +17,7 @@ import java.util.Random;
 public class Steps extends TestBase {
 
     public void addRandomProductToBasketAndReturnToHomePage(Basket basket, int quantity)  {
-        int randomIndex = new Random().nextInt(at(HomePage.class).getProductMiniatureContainerPage().getProductMiniatures().size());
+        int randomIndex = RandomHelper.getRandomNumber(at(HomePage.class).getProductMiniatureContainerPage().getProductMiniatures().size());
 
         at(HomePage.class)
                 .getProductMiniatureContainerPage()
@@ -33,7 +34,7 @@ public class Steps extends TestBase {
 
     }
 
-    public void chooseCategoryAndProduct(String categoryName, String productName) {
+    public void chooseCategoryAndProduct(String categoryName, String productName) throws Exception {
         at(TopMenuPage.class)
                 .goToCategoryPageWithName(categoryName);
 

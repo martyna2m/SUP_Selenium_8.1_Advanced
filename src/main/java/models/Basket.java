@@ -1,6 +1,8 @@
 package models;
 
 import helpers.PriceHelper;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.basket.BasketLinePage;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -50,8 +52,18 @@ public class Basket {
         getExpectedBasketLines().remove(getBasketLineFromBasket(name));
     }
 
-//    public void clearBasket(){
-//        getExpectedBasketLines().clear();
-//    }
+
+    public BigDecimal getTotalSumOfBasketLines() {
+        BigDecimal totalSum = PriceHelper.convertIntToBigDecimal(0);
+        if (!basketLines.isEmpty()) {
+            for (BasketLine basketLine : basketLines) {
+                totalSum = totalSum.add(basketLine.getTotalPrice());
+            }
+            return totalSum;
+        }
+        return BigDecimal.ZERO.setScale(2);
+    }
+
+
 
 }

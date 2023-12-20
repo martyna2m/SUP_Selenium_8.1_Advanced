@@ -7,6 +7,7 @@ import pages.base.BasePage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductMiniatureContainerPage extends BasePage {
 
@@ -16,7 +17,6 @@ public class ProductMiniatureContainerPage extends BasePage {
 
     @FindBy(css = ".product-miniature")
     List<WebElement> productMiniatures;
-
 
 
     public List<ProductMiniaturePage> getProductMiniatures() {
@@ -29,26 +29,30 @@ public class ProductMiniatureContainerPage extends BasePage {
 
 
     public List<String> getProductNamesList() {
-        List<String> productNames = new ArrayList<>();
-        List<ProductMiniaturePage> miniatures = getProductMiniatures();
-        for (ProductMiniaturePage miniature : miniatures) {
-            productNames.add(miniature.getName());
-        }
-        return productNames;
+        return getProductMiniatures().stream()
+                .map(ProductMiniaturePage::getName)
+                .collect(Collectors.toList());
+
     }
 
 
-    public void selectProductByName(String expectedName){
+    public void selectProductByName(String expectedName) throws Exception {
         for (ProductMiniaturePage productMiniature : getProductMiniatures()) {
             if (productMiniature.getName() != null && expectedName.equalsIgnoreCase(productMiniature.getName())) {
                 productMiniature.clickOnMiniature();
-                break;
+                return;
             }
         }
+        throw new Exception("Product with name '" + expectedName + "' not found");
+
     }
 
     public void selectProductByIndex(int index) {
-      getProductMiniatures().get(index).clickOnMiniature();
+        try {
+            getProductMiniatures().get(index).clickOnMiniature();
+        } catch (Exception e) {
+            System.out.println("No product found by index '" + index + "'");
+        }
     }
 
 

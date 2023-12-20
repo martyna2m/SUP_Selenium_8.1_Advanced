@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base.BasePage;
 
+import java.math.BigDecimal;
+
 
 public class BasketLinePage extends BasePage {
     public BasketLinePage(WebDriver driver, WebElement parent) {
@@ -50,5 +52,9 @@ public class BasketLinePage extends BasePage {
         click(deleteBtn);
         basket.removeBasketLine(nameLabel.getText());
 
+    }
+
+    public BigDecimal getTotalPrice(){
+     return getPriceFromElement(totalPrice);
     }
 }

@@ -67,12 +67,12 @@ public class CategoriesTest extends TestBase {
 
     }
 
-private String getExpectedNumberOfProductsInfo(int number){
-        if(number ==1){
+    private String getExpectedNumberOfProductsInfo(int number) {
+        if (number == 1) {
             return "There is 1 product.";
         }
         return "There are " + number + " products.";
-}
+    }
 
 }
 
