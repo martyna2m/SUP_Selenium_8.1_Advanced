@@ -6,6 +6,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import pages.home.HomePage;
 import pages.home.SearchResultsPage;
+import providers.DataFaker;
 import tests.base.TestBase;
 
 import java.util.List;

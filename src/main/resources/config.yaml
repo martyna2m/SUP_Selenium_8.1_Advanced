@@ -31,6 +31,7 @@ addresses:
 
 
 testData:
+  dateFormat: MM/dd/yyyy
   currency: $
   defaultWait: 10
   productName: HUMMINGBIRD
