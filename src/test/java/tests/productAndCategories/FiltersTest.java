@@ -14,8 +14,8 @@ public class FiltersTest extends TestBase {
     @Tag("productAndCategories")
     @Tag("yaml5")
     public void setFilters() {
-        int lowerPriceFilter = parseInt(testDataProvider.getTestData("lowerPriceFilter5"));
-        int higherFilterPrice = parseInt(testDataProvider.getTestData("higherPriceFilter5"));
+        int lowerPriceFilter = parseInt(testDataProvider.getTestData("lowerPriceFilter"));
+        int higherFilterPrice = parseInt(testDataProvider.getTestData("higherPriceFilter"));
         openPage("accessoriesPage");
 
         int initialNumberOfProducts = at(CategoryPage.class)

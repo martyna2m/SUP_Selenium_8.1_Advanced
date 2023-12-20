@@ -9,9 +9,10 @@ import pages.base.BasePage;
 
 import java.util.List;
 
-@Getter
+
 public class AddressesSectionPage extends BasePage {
 
+    @Getter
     AddressesSectionFormPage addressesSectionFormPage = new AddressesSectionFormPage(driver);
 
     @FindBy(xpath = "//*[contains(text(), 'differs')]")

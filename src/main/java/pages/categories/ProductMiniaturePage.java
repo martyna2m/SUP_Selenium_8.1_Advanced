@@ -10,8 +10,7 @@ import pages.base.BasePage;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Getter
-@Setter
+
 public class ProductMiniaturePage extends BasePage {
 
     WebDriver driver;
@@ -46,4 +45,7 @@ public class ProductMiniaturePage extends BasePage {
         return getPriceFromElement(currentPrice);
     }
 
+    public void clickOnMiniature(){
+        click(icon);
+    }
 }

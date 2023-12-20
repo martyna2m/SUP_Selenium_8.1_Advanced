@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base.BasePage;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderHistoryPage extends BasePage {
 
@@ -14,11 +14,9 @@ public class OrderHistoryPage extends BasePage {
     private List<WebElement> tableRows;
 
     public List<OrderRowPage> getRows() {
-        List<OrderRowPage> tableOrderRows = new ArrayList<>();
-        for (WebElement tableOrderRow : tableRows) {
-            tableOrderRows.add(new OrderRowPage(driver, tableOrderRow));
-        }
-        return tableOrderRows;
+        return tableRows.stream()
+                .map(tableOrderRow -> new OrderRowPage(driver, tableOrderRow))
+                .collect(Collectors.toList());
     }
 
     public OrderHistoryPage(WebDriver driver) {

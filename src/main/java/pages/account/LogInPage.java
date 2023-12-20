@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base.BasePage;
 
-@Getter
-@Setter
 public class LogInPage extends BasePage {
     public LogInPage(WebDriver driver) {
         super(driver);

@@ -1,7 +1,6 @@
 package pages.categories;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,13 +10,13 @@ import pages.base.BasePage;
 
 import java.util.List;
 
-@Getter
-@Setter
 public class CategoryPage extends BasePage {
 
-    ProductMiniatureContainerPage productMiniatureContainerPage = new ProductMiniatureContainerPage(driver);
+    @Getter
+    private ProductMiniatureContainerPage productMiniatureContainerPage = new ProductMiniatureContainerPage(driver);
 
-    SideFilterMenuPage sideFilterMenuPage = new SideFilterMenuPage(driver);
+    @Getter
+    private SideFilterMenuPage sideFilterMenuPage = new SideFilterMenuPage(driver);
 
 
     @FindBy(css = ".h1")
@@ -45,11 +44,8 @@ public class CategoryPage extends BasePage {
     }
 
     public String getTotalNumberOfProductsInfo() {
-        String actualInfo = getText(totalNumberOfProductsInfo);
-        if (actualInfo.equals("There is 1 product.")) {
-            return "There are 1 products.";
-        }
-        return actualInfo;
+       return getText(totalNumberOfProductsInfo);
+
     }
 
     public CategoryPage deleteFilter(String filterName) {

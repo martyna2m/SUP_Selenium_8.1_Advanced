@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import pages.basket.BasketPage;
+import pages.basket.BasketSideGridPage;
 import steps.Steps;
 
 import java.util.List;
@@ -16,27 +17,24 @@ import java.util.Random;
 public class GenericBasketTest extends Steps {
     @RepeatedTest(1)
     @Tag("basket")
-    @Tag("yaml6")
     public void addRandomProductsToBasket() {
+        Basket basket = new Basket();
 
         openPage("homePage");
-        int numberOfRepetitions = parseInt(testDataProvider.getTestData("numberOfRepetitions6"));
+        int numberOfRepetitions = parseInt(testDataProvider.getTestData("numberOfRepetitions"));
 
         for (int i = 0; i < numberOfRepetitions; i++) {
             int randomExpectedQuantity = (new Random().nextInt(5)) + 1;
-            addRandomProductToBasketAndReturnToHomePage(randomExpectedQuantity);
+            addRandomProductToBasketAndReturnToHomePage(basket, randomExpectedQuantity);
         }
 
         openPage("basketPage");
 
         List<BasketLine> actualBasketLines = at(BasketPage.class).getBasketLinesInBasket();
-        List<BasketLine> expectedBasketLines = Basket.getInstance().getExpectedBasketLines();
+        List<BasketLine> expectedBasketLines = basket.getExpectedBasketLines();
 
-        for (int i = 0; i < actualBasketLines.size(); i++) {
-            Assertions.assertThat(expectedBasketLines.get(i)).usingRecursiveComparison().isEqualTo(actualBasketLines.get(i));
-        }
-
-        Assertions.assertThat(at(BasketPage.class).IsTotalPriceCorrect()).isTrue();
+        Assertions.assertThat(expectedBasketLines).usingRecursiveComparison().isEqualTo(actualBasketLines);
+        Assertions.assertThat(at(BasketPage.class).getTotalSumOfBasketLines()).isEqualTo(at(BasketSideGridPage.class).getProductsTotalSum());
 
 
     }

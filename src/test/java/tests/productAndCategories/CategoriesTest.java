@@ -55,19 +55,24 @@ public class CategoriesTest extends TestBase {
                         .isSideFilterMenuDisplayed())
                 .isTrue();
 
-        int actualNumberOfProducts =
+        int numberOfDisplayedProducts =
                 at(CategoryPage.class)
                         .getProductMiniatureContainerPage()
                         .getProductMiniatures().size();
 
         String actualNumberOfProductsInfo = at(CategoryPage.class).getTotalNumberOfProductsInfo();
-        String expectedNumberOfProductsInfo = "There are " + actualNumberOfProducts + " products.";
+        String expectedNumberOfProductsInfo = getExpectedNumberOfProductsInfo(numberOfDisplayedProducts);
 
-        Assertions.assertThat(expectedNumberOfProductsInfo)
-                .isEqualTo(actualNumberOfProductsInfo);
+        Assertions.assertThat(expectedNumberOfProductsInfo).isEqualTo(actualNumberOfProductsInfo);
 
     }
 
+private String getExpectedNumberOfProductsInfo(int number){
+        if(number ==1){
+            return "There is 1 product.";
+        }
+        return "There are " + number + " products.";
+}
 
 }
 

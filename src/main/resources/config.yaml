@@ -31,16 +31,15 @@ addresses:
 
 
 testData:
+  currency: $
   defaultWait: 10
-  productName1: HUMMINGBIRD
-  productName2: THE BEST IS YET POSTER
-  quantity2: 3
-  quantity3: 2
-  numberOfProducts3: 2
-  categoryName4: Art
-  posterName4: THE BEST IS YET POSTER
-  paymentStatus4: Awaiting check payment
-  lowerPriceFilter5: 13
-  higherPriceFilter5: 15
-  numberOfRepetitions6: 10
+  productName: HUMMINGBIRD
+  posterName: THE BEST IS YET POSTER
+  quantity: 2
+  numberOfProducts: 2
+  categoryName: Art
+  paymentStatus: Awaiting check payment
+  lowerPriceFilter: 13
+  higherPriceFilter: 15
+  numberOfRepetitions: 10
 

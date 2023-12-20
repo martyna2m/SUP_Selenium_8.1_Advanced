@@ -1,5 +1,6 @@
 package tests.search;
 
+import helpers.PriceHelper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
@@ -31,12 +32,10 @@ public class SearchInputTest extends TestBase {
 
     }
 
-
     @RepeatedTest(1)
     @Tag("search")
-    @Tag("yaml1")
     public void verifySearchDropdown() {
-        String searchedProduct = testDataProvider.getTestData("productName1");
+        String searchedProduct = testDataProvider.getTestData("productName");
         openPage("homePage");
 
         List<String> suggestedProductNames = at(HomePage.class)

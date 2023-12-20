@@ -1,7 +1,5 @@
 package pages.checkout;
 
-import lombok.Getter;
-import lombok.Setter;
 import models.Address;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,8 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import pages.base.BasePage;
 import providers.DataFaker;
 
-@Getter
-@Setter
+
 public class AddressesSectionFormPage extends BasePage {
 
 

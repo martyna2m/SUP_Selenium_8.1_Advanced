@@ -7,8 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base.BasePage;
 
-@Getter
-@Setter
+
 public class TopGridPage extends BasePage {
     public TopGridPage(WebDriver driver) {
         super(driver);

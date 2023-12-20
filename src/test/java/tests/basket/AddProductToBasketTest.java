@@ -1,5 +1,6 @@
 package tests.basket;
 
+import models.Basket;
 import models.BasketLine;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
@@ -12,12 +13,12 @@ import tests.base.TestBase;
 
 public class AddProductToBasketTest extends TestBase {
 
-    @RepeatedTest(1)
+    @RepeatedTest(3)
     @Tag("basket")
-    @Tag("yaml2")
     public void addProductToBasket() {
-        String expectedProductName = testDataProvider.getTestData("productName2");
-        int expectedQuantity = parseInt(testDataProvider.getTestData("quantity2"));
+        Basket basket = new Basket();
+        String expectedProductName = testDataProvider.getTestData("posterName");
+        int expectedQuantity = parseInt(testDataProvider.getTestData("quantity"));
 
         openPage("artPage");
 
@@ -30,7 +31,7 @@ public class AddProductToBasketTest extends TestBase {
         BasketLine expectedBasketLine =
                 at(ProductDetailsPage.class)
                         .selectQuantity(expectedQuantity)
-                        .addProductToBasket();
+                        .addProductToBasket(basket);
 
         BasketLine popupBasketLine =
                 at(AddedToBasketPopUpPage.class).toBasketLine();

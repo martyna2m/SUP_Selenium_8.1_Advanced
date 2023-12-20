@@ -1,7 +1,7 @@
 package pages.categories;
 
+import helpers.PriceHelper;
 import lombok.Getter;
-import lombok.Setter;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,10 +16,9 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Getter
-@Setter
-public class SideFilterMenuPage extends BasePage {
 
+public class SideFilterMenuPage extends BasePage {
+    @Getter
     @FindBy(css = ".category-sub-menu>li")
     private List<WebElement> subCategories;
 
@@ -76,15 +75,15 @@ public class SideFilterMenuPage extends BasePage {
     public List<BigDecimal> getPricesFromRangeFilter() {
         List<BigDecimal> prices = new ArrayList<>();
         List<String> pricesStrings = extractTwoPrices(getPriceRangeText());
-        prices.add(deleteCurrency(pricesStrings.get(0)));
-        prices.add(deleteCurrency(pricesStrings.get(1)));
+        prices.add(PriceHelper.deleteCurrency(pricesStrings.get(0)));
+        prices.add(PriceHelper.deleteCurrency(pricesStrings.get(1)));
         return prices;
     }
 
 
     public void setPriceFilters(int expectedLowerPrice, int expectedHigherPrice) {
-        BigDecimal expectedLowerPriceBD = convertIntToBigDecimal(expectedLowerPrice);
-        BigDecimal expectedHigherPriceBD = convertIntToBigDecimal(expectedHigherPrice);
+        BigDecimal expectedLowerPriceBD = PriceHelper.convertIntToBigDecimal(expectedLowerPrice);
+        BigDecimal expectedHigherPriceBD = PriceHelper.convertIntToBigDecimal(expectedHigherPrice);
         setFilter(0, 0, expectedLowerPriceBD);
         setFilter(1, 1, expectedHigherPriceBD);
 
@@ -92,12 +91,11 @@ public class SideFilterMenuPage extends BasePage {
 
 
     private void getDirectionAndClick(WebElement element, BigDecimal currentPrice, BigDecimal expectedPrice) {
+        actions.clickAndHold(element);
         if (currentPrice.compareTo(expectedPrice) > 0) {
-            actions.clickAndHold(element);
             element.sendKeys(Keys.ARROW_LEFT);
         }
         if (currentPrice.compareTo(expectedPrice) < 0) {
-            actions.clickAndHold(element);
             element.sendKeys(Keys.ARROW_RIGHT);
         }
         defaultWait.until(ExpectedConditions.invisibilityOf(spinner));

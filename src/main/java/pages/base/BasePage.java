@@ -1,5 +1,6 @@
 package pages.base;
 
+import helpers.PriceHelper;
 import lombok.Getter;
 import lombok.Setter;
 import models.Basket;
@@ -17,14 +18,12 @@ import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Getter
-@Setter
+
 public class BasePage {
 
     public WebDriver driver;
     public Actions actions;
     public WebDriverWait defaultWait;
-    public Basket basket;
     public TestDataProvider testDataProvider;
 
 
@@ -44,8 +43,6 @@ public class BasePage {
         this.actions = new Actions(driver);
         this.testDataProvider = new TestDataProvider();
         this.defaultWait = new WebDriverWait(driver, Duration.ofSeconds(parseInt(testDataProvider.getTestData("defaultWait"))));
-        this.basket = Basket.getInstance();
-
     }
 
 
@@ -88,23 +85,8 @@ public class BasePage {
     }
 
 
-    public static BigDecimal deleteCurrency(String priceWithCurrency) {
-        Pattern pattern = Pattern.compile("\\$\\d+\\.\\d{2}");
-        Matcher matcher = pattern.matcher(priceWithCurrency);
 
-        if (matcher.find()) {
-            String priceString = matcher.group().substring(1);
-            return new BigDecimal(priceString);
-        } else {
 
-            return BigDecimal.ZERO;
-        }
-    }
-
-    public BigDecimal convertIntToBigDecimal(int intValue) {
-        return BigDecimal.valueOf(intValue).setScale(2);
-
-    }
     public int parseInt(String text) {
         return Integer.parseInt(text);
 
@@ -112,7 +94,7 @@ public class BasePage {
 
     public BigDecimal getPriceFromElement(WebElement element) {
         waitToBeVisible(element);
-        return deleteCurrency(getText(element));
+        return PriceHelper.deleteCurrency(getText(element));
     }
 
     public int getIntNumberFromValue(WebElement element) {
@@ -123,9 +105,7 @@ public class BasePage {
         return parseInt(getText(element));
     }
 
-    public BigDecimal getTotalPriceByQuantity(BigDecimal price, int quantity) {
-        return price.multiply(BigDecimal.valueOf(quantity));
-    }
+
 
 
 }

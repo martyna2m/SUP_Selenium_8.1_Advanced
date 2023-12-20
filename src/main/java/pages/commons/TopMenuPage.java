@@ -14,8 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
+
 public class TopMenuPage extends BasePage {
     public TopMenuPage(WebDriver driver) {
         super(driver);

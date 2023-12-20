@@ -1,6 +1,7 @@
 package tests.checkout;
 
 import models.Address;
+import models.Basket;
 import models.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
@@ -15,31 +16,32 @@ import steps.Steps;
 public class CheckOutTest extends Steps {
     @RepeatedTest(1)
     @Tag("checkout")
-    @Tag("yaml4")
     public void checkOutTest() {
 
-        String categoryName = testDataProvider.getTestData("categoryName4");
-        String productName = testDataProvider.getTestData("posterName4");
+        Basket basket = new Basket();
+
+        String categoryName = testDataProvider.getTestData("categoryName");
+        String productName = testDataProvider.getTestData("posterName");
 
         UserFactory userFactory = new UserFactory();
         AddressFactory addressFactory = new AddressFactory();
 
-        Address address1 = addressFactory.getExistingAddress("address1");
-        User user1 = userFactory.getExisitingUser("user1");
+        Address address = addressFactory.getExistingAddress("address1");
+        User user = userFactory.getExisitingUser("user1");
 
         openPage("loginPage");
 
         at(LogInPage.class)
-                .logIn(user1.getEmail(), user1.getPassword());
+                .logIn(user.getEmail(), user.getPassword());
 
         chooseCategoryAndProduct(categoryName, productName);
-        addProductAndProceedToCheckOut();
+        addProductAndProceedToCheckOut(basket);
 
         at(CheckOutPage.class)
                 .getAddressesSectionPage()
                 .clickAddNewInvoiceAddress()
                 .getAddressesSectionFormPage()
-                .fillTheAddressForm(address1);
+                .fillTheAddressForm(address);
 
         fillPaymentAndShippingSection();
 
@@ -58,11 +60,11 @@ public class CheckOutTest extends Steps {
         String invoiceAddressDetails = at(OrderDetails.class).getNameFromInvoiceAddress();
 
         Assertions.assertThat(expectedOrderDetails).isEqualTo(actualOrderDetails);
-        Assertions.assertThat(invoiceStatus).isEqualTo(testDataProvider.getTestData("paymentStatus4"));
+        Assertions.assertThat(invoiceStatus).isEqualTo(testDataProvider.getTestData("paymentStatus"));
 
-        Assertions.assertThat(deliveryAddressDetails).contains(user1.getFullName());
-        Assertions.assertThat(invoiceAddressDetails).contains(user1.getFullName());
-        Assertions.assertThat(invoiceAddressDetails).contains(address1.getStreet(), address1.getCity(), address1.getPostalCode(), address1.getCountry());
+        Assertions.assertThat(deliveryAddressDetails).contains(user.getFullName());
+        Assertions.assertThat(invoiceAddressDetails).contains(user.getFullName());
+        Assertions.assertThat(invoiceAddressDetails).contains(address.getStreet(), address.getCity(), address.getPostalCode(), address.getCountry());
 
     }
 }

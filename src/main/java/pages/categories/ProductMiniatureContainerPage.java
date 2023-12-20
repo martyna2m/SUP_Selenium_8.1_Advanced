@@ -17,6 +17,8 @@ public class ProductMiniatureContainerPage extends BasePage {
     @FindBy(css = ".product-miniature")
     List<WebElement> productMiniatures;
 
+
+
     public List<ProductMiniaturePage> getProductMiniatures() {
         List<ProductMiniaturePage> productMiniaturePages = new ArrayList<>();
         for (WebElement productMiniaturePage : productMiniatures) {
@@ -30,23 +32,23 @@ public class ProductMiniatureContainerPage extends BasePage {
         List<String> productNames = new ArrayList<>();
         List<ProductMiniaturePage> miniatures = getProductMiniatures();
         for (ProductMiniaturePage miniature : miniatures) {
-            productNames.add(miniature.getNameLabel().getText());
+            productNames.add(miniature.getName());
         }
         return productNames;
     }
 
 
-    public void selectProductByName(String expectedName) {
+    public void selectProductByName(String expectedName){
         for (ProductMiniaturePage productMiniature : getProductMiniatures()) {
             if (productMiniature.getName() != null && expectedName.equalsIgnoreCase(productMiniature.getName())) {
-                click(productMiniature.getIcon());
+                productMiniature.clickOnMiniature();
                 break;
             }
         }
     }
 
     public void selectProductByIndex(int index) {
-       click(getProductMiniatures().get(index).getIcon());
+      getProductMiniatures().get(index).clickOnMiniature();
     }
 
 

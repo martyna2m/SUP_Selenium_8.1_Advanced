@@ -1,10 +1,12 @@
 package tests.basket;
 
+import models.Basket;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import pages.basket.BasketLinePage;
 import pages.basket.BasketPage;
+import pages.basket.BasketSideGridPage;
 import pages.commons.TopGridPage;
 import steps.Steps;
 
@@ -12,28 +14,30 @@ import java.util.List;
 
 public class RemoveProductsTest extends Steps {
 
-    @RepeatedTest(1)
+    @RepeatedTest(5)
     @Tag("basket")
-    @Tag("yaml3")
     public void removeAddedProductsFromBasket() throws InterruptedException {
-        int expectedQuantity = parseInt(testDataProvider.getTestData("quantity3"));
-        int expectedNumberOfProducts = parseInt(testDataProvider.getTestData("numberOfProducts3"));
+        Basket basket = new Basket();
+        BasketPage basketPage = new BasketPage(driver);
+        BasketSideGridPage basketSideGridPage = new BasketSideGridPage(driver);
+
+        int expectedQuantity = parseInt(testDataProvider.getTestData("quantity"));
+        int expectedNumberOfProducts = parseInt(testDataProvider.getTestData("numberOfProducts"));
 
         openPage("homePage");
         for (int i = 0; i < expectedNumberOfProducts; i++) {
-            addRandomProductToBasketAndReturnToHomePage(expectedQuantity);
+            addRandomProductToBasketAndReturnToHomePage(basket, expectedQuantity);
         }
         openPage("basketPage");
-        Assertions.assertThat(at(BasketPage.class).IsTotalPriceCorrect()).isTrue();
+        Assertions.assertThat(basketPage.getTotalSumOfBasketLines()).isEqualTo(basketSideGridPage.getProductsTotalSum());
 
 
         for (int j = 0; j < expectedNumberOfProducts; j++) {
-            List<BasketLinePage> basketLinePages = at(BasketPage.class).getBasketLinePages();
+            List<BasketLinePage> basketLinePages = basketPage.getBasketLinePages();
 
             if (!basketLinePages.isEmpty()) {
-                basketLinePages.get(0).deleteBasketLine();
-                Thread.sleep(1000);
-                Assertions.assertThat(at(BasketPage.class).IsTotalPriceCorrect()).isTrue();
+                at(BasketPage.class).deleteBasketLine(basket, basketLinePages.get(0));
+                Assertions.assertThat(basketPage.getTotalSumOfBasketLines()).isEqualTo(basketSideGridPage.getProductsTotalSum());
 
             }
 

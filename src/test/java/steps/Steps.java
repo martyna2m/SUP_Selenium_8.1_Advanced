@@ -1,5 +1,6 @@
 package steps;
 
+import models.Basket;
 import pages.basket.BasketSideGridPage;
 import pages.categories.CategoryPage;
 import pages.checkout.PaymentSectionPage;
@@ -14,7 +15,7 @@ import java.util.Random;
 
 public class Steps extends TestBase {
 
-    public void addRandomProductToBasketAndReturnToHomePage(int quantity)  {
+    public void addRandomProductToBasketAndReturnToHomePage(Basket basket, int quantity)  {
         int randomIndex = new Random().nextInt(at(HomePage.class).getProductMiniatureContainerPage().getProductMiniatures().size());
 
         at(HomePage.class)
@@ -23,7 +24,7 @@ public class Steps extends TestBase {
 
         at(ProductDetailsPage.class)
                 .selectQuantity(quantity)
-                .addProductToBasket();
+                .addProductToBasket(basket);
 
         at(AddedToBasketPopUpPage.class)
                 .clickContinueShopping();
@@ -41,9 +42,10 @@ public class Steps extends TestBase {
                 .selectProductByName(productName);
     }
 
-    public void addProductAndProceedToCheckOut(){
+    public void addProductAndProceedToCheckOut(Basket basket){
+
         at(ProductDetailsPage.class)
-                .addProductToBasket();
+                .addProductToBasket(basket);
 
         at(AddedToBasketPopUpPage.class)
                 .clickProceedToCheckout();

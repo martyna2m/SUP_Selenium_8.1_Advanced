@@ -1,7 +1,6 @@
 package pages.basket;
 
-import lombok.Getter;
-import lombok.Setter;
+import helpers.PriceHelper;
 import models.Basket;
 import models.BasketLine;
 import models.Product;
@@ -10,8 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base.BasePage;
 
-@Getter
-@Setter
+
 public class BasketLinePage extends BasePage {
     public BasketLinePage(WebDriver driver, WebElement parent) {
         super(driver, parent);
@@ -44,13 +42,13 @@ public class BasketLinePage extends BasePage {
 
 
     public BasketLine toBasketLine() {
-        return new BasketLine(new Product(nameLabel.getText(), getPriceFromElement(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPriceByQuantity(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
+        return new BasketLine(new Product(nameLabel.getText(), getPriceFromElement(currentPrice)), getIntNumberFromValue(quantityInput), PriceHelper.getTotalPriceByQuantity(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
 
     }
 
-    public void deleteBasketLine() {
+    public void deleteLine(Basket basket) {
         click(deleteBtn);
-        Basket.getInstance().removeBasketLine(nameLabel.getText());
+        basket.removeBasketLine(nameLabel.getText());
 
     }
 }

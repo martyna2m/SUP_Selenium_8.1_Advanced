@@ -1,5 +1,6 @@
 package pages.product;
 
+import helpers.PriceHelper;
 import lombok.Getter;
 import models.BasketLine;
 import models.Product;
@@ -8,12 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base.BasePage;
 
-@Getter
+
 public class AddedToBasketPopUpPage extends BasePage {
     public AddedToBasketPopUpPage(WebDriver driver) {
         super(driver);
     }
 
+    @Getter
     @FindBy(xpath = "//*[@id='blockcart-modal']//*[@class='modal-dialog']//*[@class='modal-content']")
     private WebElement popUpWindow;
 
@@ -49,7 +51,7 @@ public class AddedToBasketPopUpPage extends BasePage {
     private WebElement proceedToCheckOutBtn;
 
     public BasketLine toBasketLine() {
-        return new BasketLine(new Product(this.addedProductName.getText(), getPriceFromElement(this.addedProductPrice)), getIntNumberFromText(this.addedProductQuantity), getTotalPriceByQuantity(getPriceFromElement(this.addedProductPrice), getIntNumberFromText(this.addedProductQuantity)));
+        return new BasketLine(new Product(this.addedProductName.getText(), getPriceFromElement(this.addedProductPrice)), getIntNumberFromText(this.addedProductQuantity), PriceHelper.getTotalPriceByQuantity(getPriceFromElement(this.addedProductPrice), getIntNumberFromText(this.addedProductQuantity)));
 
     }
 
@@ -61,4 +63,5 @@ public class AddedToBasketPopUpPage extends BasePage {
     public void clickContinueShopping() {
         click(continueShoppingBtn);
     }
+
 }
