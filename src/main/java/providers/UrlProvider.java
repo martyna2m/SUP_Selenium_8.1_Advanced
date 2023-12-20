@@ -23,7 +23,7 @@ public class UrlProvider {
 
     public String getUrl(String urlKey) {
         String homePageUrl = urls.get("homePage").toString();
-        if (!Objects.equals(urlKey, "homePage")) {
+        if (!urlKey.equals("homePage")) {
             String urlSuffix = urls.get(urlKey).toString();
             return homePageUrl + urlSuffix;
         } else return homePageUrl;
