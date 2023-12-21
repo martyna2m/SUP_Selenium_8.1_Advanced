@@ -40,7 +40,6 @@ public class SideFilterMenuPage extends BasePage {
     private Map<String, WebElement> handlesMap;
 
 
-
     public void goToSubCategoryPage(WebElement element) {
         click(element);
     }
@@ -102,14 +101,19 @@ public class SideFilterMenuPage extends BasePage {
 
     private void setFilter(String leftOrRight, String fromOrTo, BigDecimal expectedPrice) {
         FilterRange currentPrices = getPricesFromRangeFilter();
+        int i = 0;
 
         while (!(currentPrices.getValue(fromOrTo).equals(expectedPrice))) {
             getDirectionAndClick(getHandle(leftOrRight), currentPrices.getValue(fromOrTo), expectedPrice);
             currentPrices = getPricesFromRangeFilter();
-
+            i++;
+            if (i > 20) {
+               break;
+            }
         }
-
     }
+
+
 
     private FilterRange extractTwoPrices(String priceRange) {
         String[] separatedPrices = priceRange.split(" - ");

@@ -16,11 +16,11 @@ import java.math.BigDecimal;
 
 public class TestBase {
 
-    protected WebDriver driver;
-    protected Browser activeBrowser;
-    protected DriverFactory driverFactory = new DriverFactory();
+    public WebDriver driver;
+    public Browser activeBrowser;
+    public DriverFactory driverFactory = new DriverFactory();
 
-    protected TestDataProvider testDataProvider = new TestDataProvider();
+    public TestDataProvider testDataProvider = new TestDataProvider();
 
 
     @BeforeEach

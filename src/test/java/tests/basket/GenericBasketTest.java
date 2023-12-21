@@ -9,16 +9,17 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import pages.basket.BasketPage;
 import pages.basket.BasketSideGridPage;
-import steps.Steps;
+import steps.prodcutSteps.AddProductsSteps;
+import tests.base.TestBase;
 
 import java.util.List;
-import java.util.Random;
 
 @Slf4j
-public class GenericBasketTest extends Steps {
+public class GenericBasketTest extends TestBase {
     @RepeatedTest(1)
     @Tag("basket")
     public void addRandomProductsToBasket() {
+        AddProductsSteps addProductsSteps = new AddProductsSteps(driver);
         Basket basket = new Basket();
 
         openPage("homePage");
@@ -26,7 +27,7 @@ public class GenericBasketTest extends Steps {
 
         for (int i = 0; i < numberOfRepetitions; i++) {
             int randomExpectedQuantity = RandomHelper.getRandomNumber(5) + 1;
-            addRandomProductToBasketAndReturnToHomePage(basket, randomExpectedQuantity);
+            addProductsSteps.addRandomProductToBasketAndReturnToHomePage(basket, randomExpectedQuantity);
         }
 
         openPage("basketPage");

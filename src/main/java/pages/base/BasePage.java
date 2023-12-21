@@ -1,22 +1,18 @@
 package pages.base;
 
 import helpers.PriceHelper;
-import lombok.Getter;
-import lombok.Setter;
-import models.Basket;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import providers.TestDataProvider;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class BasePage {
@@ -85,8 +81,6 @@ public class BasePage {
     }
 
 
-
-
     public int parseInt(String text) {
         return Integer.parseInt(text);
 
@@ -105,7 +99,9 @@ public class BasePage {
         return parseInt(getText(element));
     }
 
-
+    public void selectByVisibleText(WebElement selectElement, String text) {
+        new Select(selectElement).selectByVisibleText(text);
+    }
 
 
 }

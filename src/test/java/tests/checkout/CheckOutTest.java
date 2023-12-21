@@ -11,12 +11,18 @@ import pages.checkout.CheckOutPage;
 import pages.checkout.OrderConfirmedPage;
 import providers.AddressFactory;
 import providers.UserFactory;
-import steps.Steps;
+import steps.checkoutSteps.CheckoutSteps;
+import steps.prodcutSteps.AddProductsSteps;
+import tests.base.TestBase;
 
-public class CheckOutTest extends Steps {
+public class CheckOutTest extends TestBase {
+
     @RepeatedTest(1)
     @Tag("checkout")
     public void checkOutTest() throws Exception {
+
+        AddProductsSteps addProductsSteps = new AddProductsSteps(driver);
+        CheckoutSteps checkoutSteps = new CheckoutSteps(driver);
 
         Basket basket = new Basket();
 
@@ -34,8 +40,8 @@ public class CheckOutTest extends Steps {
         at(LogInPage.class)
                 .logIn(user.getEmail(), user.getPassword());
 
-        chooseCategoryAndProduct(categoryName, productName);
-        addProductAndProceedToCheckOut(basket);
+        addProductsSteps.chooseCategoryAndProduct(categoryName, productName);
+        addProductsSteps.addProductAndProceedToCheckOut(basket);
 
         at(CheckOutPage.class)
                 .getAddressesSectionPage()
@@ -43,7 +49,7 @@ public class CheckOutTest extends Steps {
                 .getAddressesSectionFormPage()
                 .fillTheAddressForm(address);
 
-        fillPaymentAndShippingSection();
+        checkoutSteps.fillPaymentAndShippingSection();
 
         String expectedOrderDetails = at(OrderConfirmedPage.class).getOrderDetails();
 

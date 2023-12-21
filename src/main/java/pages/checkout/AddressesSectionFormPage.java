@@ -4,7 +4,6 @@ import models.Address;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 import pages.base.BasePage;
 import providers.DataFaker;
 
@@ -109,33 +108,25 @@ public class AddressesSectionFormPage extends BasePage {
     public AddressesSectionFormPage chooseCountry(String country) {
         if (isCountryEmpty()) {
             click(countrySelect);
-            new Select(countrySelect).selectByVisibleText(country);
+            selectByVisibleText(countrySelect, country);
         }
         return this;
     }
 
     public AddressesSectionFormPage chooseState(String state) {
         click(stateSelect);
-        new Select(stateSelect).selectByVisibleText(state);
+        selectByVisibleText(stateSelect, state);
         return this;
     }
 
 
     private boolean isCountryEmpty() {
-        boolean isEmpty = false;
-        if ((countrySelect.getAttribute("value").isEmpty())) {
-            isEmpty = true;
-        }
-        return isEmpty;
+        return countrySelect.getAttribute("value").isEmpty();
     }
 
 
     private boolean isNameEmpty() {
-        boolean isEmpty = false;
-        if ((firstNameInput.getAttribute("value").isEmpty()) || (lastNameInput.getAttribute("value").isEmpty())) {
-            isEmpty = true;
-        }
-        return isEmpty;
+        return (firstNameInput.getAttribute("value").isEmpty()) || (lastNameInput.getAttribute("value").isEmpty());
 
     }
 }

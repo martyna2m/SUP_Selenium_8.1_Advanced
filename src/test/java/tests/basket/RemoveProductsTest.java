@@ -1,6 +1,5 @@
 package tests.basket;
 
-import helpers.PriceHelper;
 import models.Basket;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
@@ -9,15 +8,17 @@ import pages.basket.BasketLinePage;
 import pages.basket.BasketPage;
 import pages.basket.BasketSideGridPage;
 import pages.commons.TopGridPage;
-import steps.Steps;
+import steps.prodcutSteps.AddProductsSteps;
+import tests.base.TestBase;
 
 import java.util.List;
 
-public class RemoveProductsTest extends Steps {
+public class RemoveProductsTest extends TestBase {
+    AddProductsSteps addProductsSteps = new AddProductsSteps(driver);
 
     @RepeatedTest(1)
     @Tag("basket")
-    public void removeAddedProductsFromBasket()  {
+    public void removeAddedProductsFromBasket() {
         Basket basket = new Basket();
         BasketPage basketPage = new BasketPage(driver);
         BasketSideGridPage basketSideGridPage = new BasketSideGridPage(driver);
@@ -27,7 +28,7 @@ public class RemoveProductsTest extends Steps {
 
         openPage("homePage");
         for (int i = 0; i < expectedNumberOfProducts; i++) {
-            addRandomProductToBasketAndReturnToHomePage(basket, expectedQuantity);
+            addProductsSteps.addRandomProductToBasketAndReturnToHomePage(basket, expectedQuantity);
         }
         openPage("basketPage");
         Assertions.assertThat(basket.getTotalSumOfBasketLines()).isEqualTo(basketSideGridPage.getProductsTotalSum());
