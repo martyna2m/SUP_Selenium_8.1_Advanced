@@ -43,7 +43,7 @@ public class BasketPage extends BasePage {
 //        return BigDecimal.ZERO.setScale(2);
 //    }
 
-    public void deleteBasketLine(Basket basket, BasketLinePage basketLinePage)  {
+    public void deleteBasketLine(Basket basket, BasketLinePage basketLinePage) {
         int initialNumberOfBasketLines = basketLinePages.size();
         if (initialNumberOfBasketLines > 0) {
             basketLinePage.deleteLine(basket);

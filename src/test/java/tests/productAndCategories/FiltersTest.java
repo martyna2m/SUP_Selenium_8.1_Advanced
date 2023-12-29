@@ -1,6 +1,6 @@
 package tests.productAndCategories;
 
-import org.assertj.core.api.Assertions;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import pages.categories.CategoryPage;
@@ -14,6 +14,8 @@ public class FiltersTest extends TestBase {
     @RepeatedTest(1)
     @Tag("productAndCategories")
     public void setFilters() {
+        SoftAssertions softAssertions = new SoftAssertions();
+
         BigDecimal lowerPriceFilter = parseBigDecimal(testDataProvider.getTestData("lowerPriceFilter"));
         BigDecimal higherFilterPrice = parseBigDecimal(testDataProvider.getTestData("higherPriceFilter"));
         openPage("accessoriesPage");
@@ -32,18 +34,20 @@ public class FiltersTest extends TestBase {
 
 
         for (ProductMiniaturePage productMiniature : filteredProductMiniatures) {
-            Assertions.assertThat(productMiniature.getCurrentProductPrice())
+
+            softAssertions.assertThat(productMiniature.getCurrentProductPrice())
+                    .as("Checking that price of " + productMiniature.getName() + " matches filters.")
                     .isGreaterThan(lowerPriceFilter)
                     .isLessThan(higherFilterPrice);
+
         }
 
         at(CategoryPage.class).deleteFilter("price");
-        Assertions.assertThat(at(CategoryPage.class)
-                        .getProductMiniatureContainerPage()
-                        .getProductMiniatures()
-                        .size())
+        softAssertions.assertThat(at(CategoryPage.class).getProductMiniatureContainerPage().getProductMiniatures().size())
+                .as("Checking the number of products after clearing filters.")
                 .isEqualTo(initialNumberOfProducts);
 
+        softAssertions.assertAll();
     }
 
 

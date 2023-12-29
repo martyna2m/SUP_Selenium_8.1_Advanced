@@ -54,7 +54,7 @@ public class BasketLinePage extends BasePage {
 
     }
 
-    public BigDecimal getTotalPrice(){
-     return getPriceFromElement(totalPrice);
+    public BigDecimal getTotalPrice() {
+        return getPriceFromElement(totalPrice);
     }
 }

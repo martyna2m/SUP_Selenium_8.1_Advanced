@@ -1,9 +1,11 @@
 package tests.search;
 
 import helpers.PriceHelper;
+import helpers.RandomHelper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
+import pages.categories.ProductMiniaturePage;
 import pages.home.HomePage;
 import pages.home.SearchResultsPage;
 import providers.DataFaker;
@@ -18,15 +20,18 @@ public class SearchInputTest extends TestBase {
     @Tag("search")
     public void searchRandomProduct() {
         openPage("homePage");
-
         HomePage homePage = new HomePage(driver);
 
-        int index = new Random().nextInt(homePage.getProductMiniatureContainerPage().getProductMiniatures().size());
+        List<ProductMiniaturePage> productsList = homePage.getProductMiniatureContainerPage().getProductMiniatures();
+        int index = RandomHelper.getRandomIndex(productsList);
         String productName = homePage.getProductMiniatureContainerPage().getProductName(index);
 
         homePage.getTopMenuPage().typeInSearchInputAndSubmit(productName);
 
         List<String> resultsNames = at(SearchResultsPage.class).getProductMiniatureContainerPage().getProductNamesList();
+        if (resultsNames.isEmpty()) {
+            throw new IllegalArgumentException("The list of product names is empty");
+        }
         for (String name : resultsNames) {
             Assertions.assertThat(name.contains(productName)).isTrue();
         }
