@@ -108,11 +108,10 @@ public class SideFilterMenuPage extends BasePage {
             currentPrices = getPricesFromRangeFilter();
             i++;
             if (i > 20) {
-               break;
+                break;
             }
         }
     }
-
 
 
     private FilterRange extractTwoPrices(String priceRange) {

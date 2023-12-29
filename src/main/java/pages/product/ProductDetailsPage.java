@@ -16,7 +16,7 @@ public class ProductDetailsPage extends BasePage {
         super(driver);
     }
 
-   @Getter
+    @Getter
     private AddedToBasketPopUpPage addedToBasketPopUpPage = new AddedToBasketPopUpPage(driver);
 
     @FindBy(xpath = "//*[@id='main']//h1")
@@ -64,12 +64,13 @@ public class ProductDetailsPage extends BasePage {
 
     }
 
-    public BasketLine addProductToBasket(Basket basket){
-        BasketLine basketLine = basket.addBasketLineToBasket(getText(this.nameLabel), getPriceFromElement(currentPrice),getIntNumberFromValue(quantityInput));
+    public BasketLine addProductToBasket(Basket basket) {
+        BasketLine basketLine = basket.addBasketLineToBasket(getText(this.nameLabel), getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput));
         click(addToBasketBtn);
         waitForPopUp();
         return basketLine;
     }
+
     private WebElement getQuantityDirection(int expectedQuantity) {
         int currentQuantity = getIntNumberFromValue(this.quantityInput);
         if (currentQuantity < expectedQuantity) {
@@ -77,46 +78,8 @@ public class ProductDetailsPage extends BasePage {
         } else return this.quantityDownBtn;
     }
 
-    private void waitForPopUp(){
+    private void waitForPopUp() {
         defaultWait.until(ExpectedConditions.visibilityOf(addedToBasketPopUpPage.getPopUpWindow()));
     }
 
-//    public BasketLine addProductToBasket(Basket basket) {
-////        if (isProductInBasket(getText(this.nameLabel), basket)) {
-////            BasketLine exisitingBasketLine = findProductInBasket(getText(this.nameLabel), basket);
-////            exisitingBasketLine.increaseQuantityAndTotalPrice(getIntNumberFromValue(quantityInput), getTotalPriceByQuantity(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
-////            click(addToBasketBtn);
-////            waitForPopUp();
-////            return exisitingBasketLine;
-////
-////        } else {
-////            BasketLine expectedBasketLine = new BasketLine(new Product(getText(nameLabel), getPriceFromElement(currentPrice)), getIntNumberFromValue(quantityInput), getTotalPriceByQuantity(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
-////            basket.addBasketLineToBasket(expectedBasketLine);
-////            click(addToBasketBtn);
-////            waitForPopUp();
-////            return expectedBasketLine;
-//        }
-//    }
-
-
-//    public boolean isProductInBasket(String productName, Basket basket) {
-//        return findProductInBasket(productName, basket) != null;
-//    }
-
-
-//    public BasketLine findProductInBasket(String productName, Basket basket) {
-//        for (BasketLine basketLine : basket.getExpectedBasketLines()) {
-//            if ((basketLine.getProduct().getName()).equals(productName)) {
-//                return basketLine;
-//            }
-//        }
-//        return null;
-//
-//    }
-
-
-
-//    public BasketLine createExpectedBasketLine(){
-//       return new BasketLine(new Product(getText(nameLabel), getPriceFromElement(currentPrice)), getIntNumberFromValue(quantityInput), PriceHelper.getTotalPriceByQuantity(getPriceFromElement(currentPrice), getIntNumberFromValue(quantityInput)));
-//    }
 }

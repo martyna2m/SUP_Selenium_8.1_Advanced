@@ -1,8 +1,6 @@
 package models;
 
 import helpers.PriceHelper;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.basket.BasketLinePage;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -63,7 +61,6 @@ public class Basket {
         }
         return BigDecimal.ZERO.setScale(2);
     }
-
 
 
 }

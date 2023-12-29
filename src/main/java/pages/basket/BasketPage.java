@@ -31,17 +31,6 @@ public class BasketPage extends BasePage {
         return getBasketLinePages().stream().map(BasketLinePage::toBasketLine).collect(Collectors.toList());
     }
 
-//    public BigDecimal getTotalSumOfBasketLinePages() {
-//        BigDecimal totalSum = PriceHelper.convertIntToBigDecimal(0);
-//        if (!basketLinePages.isEmpty()) {
-//            defaultWait.until(ExpectedConditions.visibilityOfAllElements(basketLinePages));
-//            for (BasketLinePage basketLinePage : getBasketLinePages()) {
-//                totalSum = totalSum.add(basketLinePage.getTotalPrice());
-//            }
-//            return totalSum;
-//        }
-//        return BigDecimal.ZERO.setScale(2);
-//    }
 
     public void deleteBasketLine(Basket basket, BasketLinePage basketLinePage) {
         int initialNumberOfBasketLines = basketLinePages.size();

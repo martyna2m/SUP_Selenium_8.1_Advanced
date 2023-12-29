@@ -24,9 +24,10 @@ public class User {
                 '}';
     }
 
-    public String getFullName(){
-       return getFirstName() + " " + getLastName();
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
     }
+
     private User() {
     }
 
@@ -34,7 +35,7 @@ public class User {
         return new Builder();
     }
 
-    public enum Gender{
+    public enum Gender {
         MALE,
         FEMALE,
         OTHER;

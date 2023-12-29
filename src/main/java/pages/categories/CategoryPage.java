@@ -44,7 +44,7 @@ public class CategoryPage extends BasePage {
     }
 
     public String getTotalNumberOfProductsInfo() {
-       return getText(totalNumberOfProductsInfo);
+        return getText(totalNumberOfProductsInfo);
 
     }
 

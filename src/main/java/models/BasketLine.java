@@ -1,10 +1,6 @@
 package models;
 
-import helpers.PriceHelper;
 import lombok.Getter;
-import lombok.Setter;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.basket.BasketLinePage;
 
 import java.math.BigDecimal;
 
